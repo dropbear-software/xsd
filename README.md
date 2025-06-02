@@ -97,6 +97,7 @@ The following XSD datatypes and their corresponding codecs are **already impleme
     * `xsd:string` (`XsdStringCodec` using Dart `String`)
     * `xsd:NMTOKEN` (`XsdNmTokenCodec` using Dart `String`)
     * `xsd:normalizedString` (`XsdNormalizedStringCodec` using Dart `String`)
+    * `xsd:Name` (`XsdNameCodec` using Dart `String`)
 
 ## Limitations
 

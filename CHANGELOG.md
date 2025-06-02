@@ -4,3 +4,4 @@
 - Implement `xsd:string` data type codec
 - Implement `xsd:nmtoken` data type codec
 - Implement `xsd:normalizedString` data type codec
+- Implement `xsd:Name` data type codec
