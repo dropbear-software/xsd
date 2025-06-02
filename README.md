@@ -93,6 +93,8 @@ The following XSD datatypes and their corresponding codecs are **already impleme
 
 * **Boolean:**
     * `xsd:boolean` (`XsdBooleanCodec` using Dart `bool`)
+* **String & Token Types:**
+    * `xsd:string` (`XsdStringCodec` using Dart `String`)
 
 ## Limitations
 
