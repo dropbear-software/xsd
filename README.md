@@ -17,7 +17,7 @@ This library aims to:
 * Validate lexical forms against the rules of the specific XSD datatype.
 * Implement the value space constraints (e.g., ranges for numeric types) defined for each built-in XSD type.
 
-## Supported XSD Datatypes (Planned)
+## Supported XSD Datatypes
 
 This library aims to support the following XSD 1.1 built-in datatypes that are commonly used in RDF and general XML processing:
 
@@ -40,7 +40,7 @@ This library aims to support the following XSD 1.1 built-in datatypes that are c
 | `xsd:long` |      ✅      |        ❌        |    `BigInt`    |     `dart:core`    |
 | `xsd:int` |      ✅      |        ✅        |    `int`    |     `dart:core`    |
 | `xsd:short` |      ✅      |        ✅        |    `int`    |     `dart:core`    |
-| `xsd:byte` |      ✅      |        ❌        |    `int`    |     `dart:core`    |
+| `xsd:byte` |      ✅      |        ✅        |    `int`    |     `dart:core`    |
 | `xsd:nonNegativeInteger` |      ✅      |        ❌        |    `BigInt`    |     `dart:core`    |
 | `xsd:positiveInteger` |      ✅      |        ❌        |    `BigInt`    |     `dart:core`    |
 | `xsd:unsignedLong` |      ✅      |        ❌        |    `BigInt`    |     `dart:core`    |
