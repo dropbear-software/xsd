@@ -6,3 +6,4 @@ export 'name/name_codec.dart';
 export 'token/token_codec.dart';
 export 'int/int_codec.dart';
 export 'ncname/ncname_codec.dart';
+export 'short/short_codec.dart';

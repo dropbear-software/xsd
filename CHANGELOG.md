@@ -8,3 +8,4 @@
 - Implement `xsd:token` data type codec
 - Implement `xsd:int` data type codec
 - Implement `xsd:NCName` data type codec
+- Implement `xsd:short` data type codec
