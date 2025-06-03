@@ -12,3 +12,4 @@
 - Implement `xsd:byte` data type codec
 - Implement `xsd:base64Binary` data type codec
 - Implement `xsd:hexBinary` data type codec
+- Implement `xsd:unsignedByte` data type codec
