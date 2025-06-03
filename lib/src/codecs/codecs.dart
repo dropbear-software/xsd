@@ -5,3 +5,4 @@ export 'normalized_string/normalized_string_codec.dart';
 export 'name/name_codec.dart';
 export 'token/token_codec.dart';
 export 'int/int_codec.dart';
+export 'ncname/ncname_codec.dart';
