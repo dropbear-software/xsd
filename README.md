@@ -49,7 +49,7 @@ This library aims to support the following XSD 1.1 built-in datatypes that are c
 | `xsd:unsignedByte` |      ✅      |        ❌        |    `int`    |     `dart:core`    |
 | `xsd:anyURI` |      ✅      |        ❌        |    `Uri`    |     `dart:core`    |
 | `xsd:hexBinary` |      ✅      |        ❌        |    `Uint8List`    |     `dart:typed_data`    |
-| `xsd:base64Binary` |      ✅      |        ❌        |    `Uint8List`    |     `dart:typed_data`    |
+| `xsd:base64Binary` |      ✅      |        ✅        |    `Uint8List`    |     `dart:typed_data`    |
 | `xsd:duration` |      ✅      |        ❌        |    ???    |     ???    |
 | `xsd:yearMonthDuration` |      ✅      |        ❌        |    ???    |     ???    |
 | `xsd:dayTimeDuration` |      ✅      |        ❌        |    ???    |     ???    |

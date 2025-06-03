@@ -8,3 +8,4 @@ export 'int/int_codec.dart';
 export 'ncname/ncname_codec.dart';
 export 'short/short_codec.dart';
 export 'byte/byte_codec.dart';
+export 'base64_binary/base64_binary_codec.dart';
