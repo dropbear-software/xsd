@@ -9,3 +9,4 @@
 - Implement `xsd:int` data type codec
 - Implement `xsd:NCName` data type codec
 - Implement `xsd:short` data type codec
+- Implement `xsd:byte` data type codec
