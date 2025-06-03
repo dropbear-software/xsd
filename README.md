@@ -21,84 +21,54 @@ This library aims to:
 
 This library aims to support the following XSD 1.1 built-in datatypes that are commonly used in RDF and general XML processing:
 
-**String Types:**
-* `xsd:string`
-* `xsd:normalizedString`
-* `xsd:token`
-* `xsd:language`
-* `xsd:NMTOKEN`
-* `xsd:Name`
-* `xsd:NCName`
-
-**Boolean Type:**
-* `xsd:boolean`
-
-**Numeric Types:**
-* `xsd:decimal`
-* `xsd:double`
-* `xsd:float`
-* `xsd:integer`
-    * `xsd:nonPositiveInteger`
-    * `xsd:negativeInteger`
-    * `xsd:long`
-        * `xsd:int`
-            * `xsd:short`
-                * `xsd:byte`
-    * `xsd:nonNegativeInteger`
-        * `xsd:positiveInteger`
-        * `xsd:unsignedLong`
-            * `xsd:unsignedInt`
-                * `xsd:unsignedShort`
-                    * `xsd:unsignedByte`
-
-**URI Type:**
-* `xsd:anyURI`
-
-**Binary Types:**
-* `xsd:hexBinary`
-* `xsd:base64Binary`
-
-**Date/Time and Duration Types:**
-* `xsd:duration`
-    * `xsd:yearMonthDuration`
-    * `xsd:dayTimeDuration`
-* `xsd:dateTime`
-* `xsd:dateTimeStamp`
-* `xsd:date`
-* `xsd:time`
-* `xsd:gYearMonth`
-* `xsd:gYear`
-* `xsd:gMonthDay`
-* `xsd:gDay`
-* `xsd:gMonth`
-
-## Unsupported XSD Datatypes
-
-For clarity and to focus on the most common use cases, especially within RDF contexts, the following XSD 1.1 built-in datatypes are **currently not planned for support**:
-
-* `xsd:QName`
-* `xsd:NOTATION`
-* `xsd:ID`
-* `xsd:IDREF`
-* `xsd:IDREFS`
-* `xsd:ENTITY`
-* `xsd:ENTITIES`
-* `xsd:NMTOKENS` (the list type; `xsd:NMTOKEN` itself *is* planned).
-
-These types often have semantics deeply tied to the overall structure and validation of an XML document instance, which is beyond the scope of just datatype representation and lexical/value space conversion.
-
-## Current Implementation Status
-
-The following XSD datatypes and their corresponding codecs are **already implemented and tested**:
-
-* **Boolean:**
-    * `xsd:boolean` (`XsdBooleanCodec` using Dart `bool`)
-* **String & Token Types:**
-    * `xsd:string` (`XsdStringCodec` using Dart `String`)
-    * `xsd:NMTOKEN` (`XsdNmTokenCodec` using Dart `String`)
-    * `xsd:normalizedString` (`XsdNormalizedStringCodec` using Dart `String`)
-    * `xsd:Name` (`XsdNameCodec` using Dart `String`)
-    * `xsd:token` (`XsdTokenCodec` using Dart `String`)
+| **XSD Data Type**          | **Planned** | **Implemented** | **Dart Data Type** | **Implementation Source** |
+|------------------------|-------------|-----------------|----------------|------------|
+|          `xsd:boolean` |      ✅      |        ✅        |     `bool`     |     `dart:core`    |
+|           `xsd:string` |      ✅      |        ✅        |    `String`    |     `dart:core`    |
+| `xsd:normalizedString` |      ✅      |        ✅        |    `String`    |     `dart:core`    |
+|            `xsd:token` |      ✅      |        ✅        |    `String`    |     `dart:core`    |
+|          `xsd:NMTOKEN` |      ✅      |        ✅        |    `String`    |     `dart:core`    |
+|             `xsd:Name` |      ✅      |        ✅        |    `String`    |     `dart:core`    |
+|         `xsd:language` |      ✅      |        ❌        |    `Locale`    |     `package:intl`    |
+|           `xsd:NCName` |      ✅      |        ❌        |    `String`    |     `dart:core`    |
+|          `xsd:decimal` |      ✅      |        ❌        |    `Decimal`    |     `package:decimal`    |
+|           `xsd:double` |      ✅      |        ❌        |    `double`    |     `dart:core`    |
+|            `xsd:float` |      ✅      |        ❌        |    `double`    |     `dart:core`    |
+|          `xsd:integer` |      ✅      |        ❌        |    `BigInt`    |     `dart:core`    |
+| `xsd:nonPositiveInteger` |      ✅      |        ❌        |    `BigInt`    |     `dart:core`    |
+| `xsd:negativeInteger` |      ✅      |        ❌        |    `BigInt`    |     `dart:core`    |
+| `xsd:long` |      ✅      |        ❌        |    `BigInt`    |     `dart:core`    |
+| `xsd:int` |      ✅      |        ❌        |    `int`    |     `dart:core`    |
+| `xsd:short` |      ✅      |        ❌        |    `int`    |     `dart:core`    |
+| `xsd:byte` |      ✅      |        ❌        |    `int`    |     `dart:core`    |
+| `xsd:nonNegativeInteger` |      ✅      |        ❌        |    `BigInt`    |     `dart:core`    |
+| `xsd:positiveInteger` |      ✅      |        ❌        |    `BigInt`    |     `dart:core`    |
+| `xsd:unsignedLong` |      ✅      |        ❌        |    `BigInt`    |     `dart:core`    |
+| `xsd:unsignedInt` |      ✅      |        ❌        |    `int`    |     `dart:core`    |
+| `xsd:unsignedShort` |      ✅      |        ❌        |    `int`    |     `dart:core`    |
+| `xsd:unsignedByte` |      ✅      |        ❌        |    `int`    |     `dart:core`    |
+| `xsd:anyURI` |      ✅      |        ❌        |    `Uri`    |     `dart:core`    |
+| `xsd:hexBinary` |      ✅      |        ❌        |    `Uint8List`    |     `dart:typed_data`    |
+| `xsd:base64Binary` |      ✅      |        ❌        |    `Uint8List`    |     `dart:typed_data`    |
+| `xsd:duration` |      ✅      |        ❌        |    ???    |     ???    |
+| `xsd:yearMonthDuration` |      ✅      |        ❌        |    ???    |     ???    |
+| `xsd:dayTimeDuration` |      ✅      |        ❌        |    ???    |     ???    |
+| `xsd:dateTime` |      ✅      |        ❌        |    ???    |     ???    |
+| `xsd:dateTimeStamp` |      ✅      |        ❌        |    ???    |     ???    |
+| `xsd:date` |      ✅      |        ❌        |    ???    |     ???    |
+| `xsd:time` |      ✅      |        ❌        |    ???    |     ???    |
+| `xsd:gYearMonth` |      ✅      |        ❌        |    ???    |     ???    |
+| `xsd:gYear` |      ✅      |        ❌        |    ???    |     ???    |
+| `xsd:gMonthDay` |      ✅      |        ❌        |    ???    |     ???    |
+| `xsd:gDay` |      ✅      |        ❌        |    ???    |     ???    |
+| `xsd:gMonth` |      ✅      |        ❌        |    ???    |     ???    |
+| `xsd:QName` |      ❌      |        ❌        |    ❌    |     ❌    |
+| `xsd:NOTATION` |      ❌      |        ❌        |    ❌    |     ❌    |
+| `xsd:ID` |      ❌      |        ❌        |    ❌    |     ❌    |
+| `xsd:IDREF` |      ❌      |        ❌        |    ❌    |     ❌    |
+| `xsd:ENTITY` |      ❌      |        ❌        |    ❌    |     ❌    |
+| `xsd:ENTITIES` |      ❌      |        ❌        |    ❌    |     ❌    |
+| `xsd:NMTOKENS` |      ❌      |        ❌        |    ❌    |     ❌    |
 
 ## Limitations
 
