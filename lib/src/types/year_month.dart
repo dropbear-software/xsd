@@ -143,14 +143,9 @@ class YearMonth {
   @override
   String toString() {
     String yearString;
-    if (year < -9999 || year > 9999) {
-      // Years outside -9999 to 9999 require more than 4 digits or a sign
-      yearString =
-          (year < 0 ? '-' : '') + year.abs().toString().padLeft(4, '0');
-    } else if (year >= 0 && year <= 9999) {
+    if (year >= 0) {
       yearString = year.toString().padLeft(4, '0');
     } else {
-      // year < 0 and year >= -9999
       yearString = '-${year.abs().toString().padLeft(4, '0')}';
     }
 
