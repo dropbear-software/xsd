@@ -99,6 +99,11 @@ void main() {
         expect(y.year, -1);
       });
 
+      test('should parse a 4 digit number with a leading zero ', () {
+        final y = GregorianYear.parse("0101");
+        expect(y.year, 101);
+      });
+
       test('should parse long positive year > 4 digits', () {
         final y = GregorianYear.parse("12023");
         expect(y.year, 12023);
@@ -110,8 +115,8 @@ void main() {
       });
 
       test('should parse long negative year > 4 digits', () {
-        final y = GregorianYear.parse("-12023");
-        expect(y.year, -12023);
+        final y = GregorianYear.parse("-1234567");
+        expect(y.year, -1234567);
       });
       test('should parse long negative year > 4 digits with timezone', () {
         final y = GregorianYear.parse("-12023+02:30");
