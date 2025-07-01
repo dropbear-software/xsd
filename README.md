@@ -57,7 +57,7 @@ This library aims to support the following XSD 1.1 built-in datatypes that are c
 | `xsd:dateTimeStamp` |      ✅      |        ❌        |    ???    |     ???    |
 | `xsd:date` |      ✅      |        ❌        |    ???    |     ???    |
 | `xsd:time` |      ✅      |        ❌        |    ???    |     ???    |
-| `xsd:gYearMonth` |      ✅      |        ❌        |    ???    |     ???    |
+| `xsd:gYearMonth` |      ✅      |        ✅        |    `YearMonth`    |     custom    |
 | `xsd:gYear` |      ✅      |        ❌        |    ???    |     ???    |
 | `xsd:gMonthDay` |      ✅      |        ❌        |    ???    |     ???    |
 | `xsd:gDay` |      ✅      |        ❌        |    ???    |     ???    |
