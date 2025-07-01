@@ -16,3 +16,4 @@
 - Implement `xsd:nonNegativeInteger` data type codec
 - Implement `xsd:long` data type codec
 - Implement `xsd:language` data type codec
+- Implement `xsd:gYearMonth` codec and data type
