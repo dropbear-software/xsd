@@ -1,16 +1,16 @@
 import 'dart:convert';
 
-import '../../types/year.dart';
-import 'string_to_year_decoder.dart';
-import 'year_to_string_encoder.dart';
+import '../../types/gregorian_year.dart';
+import 'year_decoder.dart';
+import 'year_encoder.dart';
 
-/// A codec for converting between [Year] objects and their XSD gYear string representations.
-class YearCodec extends Codec<Year, String> {
-  const YearCodec();
-
-  @override
-  Converter<String, Year> get decoder => const StringToYearDecoder();
+/// A codec for converting between [GregorianYear] objects and their XSD gYear string representations.
+class GregorianYearCodec extends Codec<GregorianYear, String> {
+  const GregorianYearCodec();
 
   @override
-  Converter<Year, String> get encoder => const YearToStringEncoder();
+  Converter<String, GregorianYear> get decoder => const GregorianYearDecoder();
+
+  @override
+  Converter<GregorianYear, String> get encoder => const GregorianYearEncoder();
 }

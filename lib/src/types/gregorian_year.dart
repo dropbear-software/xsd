@@ -8,7 +8,7 @@ import '../helpers/whitespace.dart';
 ///
 /// See [XSD gYear](https://www.w3.org/TR/xmlschema11-2/#gYear).
 @immutable
-class Year {
+class GregorianYear {
   /// The year component of this gYear.
   ///
   /// Can be negative (representing BCE years) or positive.
@@ -21,11 +21,11 @@ class Year {
   /// `null` means no timezone is specified.
   final int? timezoneOffsetInMinutes;
 
-  /// Constructs a [Year] instance.
+  /// Constructs a [GregorianYear] instance.
   ///
   /// The [year] can be any integer.
   /// The [timezoneOffsetInMinutes], if provided, must be between -840 and 840.
-  Year(this.year, {this.timezoneOffsetInMinutes}) {
+  GregorianYear(this.year, {this.timezoneOffsetInMinutes}) {
     if (timezoneOffsetInMinutes != null) {
       if (timezoneOffsetInMinutes! < -14 * 60 ||
           timezoneOffsetInMinutes! > 14 * 60) {
@@ -38,13 +38,13 @@ class Year {
     }
   }
 
-  /// Parses a string in XSD gYear format into a [Year] object.
+  /// Parses a string in XSD gYear format into a [GregorianYear] object.
   ///
   /// The expected format is `CCYY` with an optional timezone suffix
   /// (e.g., "2023", "2023Z", "2023+05:30", "-0001" for 2 BCE).
   ///
   /// Throws a [FormatException] if the input string is not a valid gYear.
-  static Year parse(String lexicalForm) {
+  static GregorianYear parse(String lexicalForm) {
     final String collapsedInput = processWhiteSpace(
       lexicalForm,
       Whitespace.collapse,
@@ -91,13 +91,10 @@ class Year {
       }
     }
 
-    return Year(
-      year,
-      timezoneOffsetInMinutes: timezoneOffsetMinutes,
-    );
+    return GregorianYear(year, timezoneOffsetInMinutes: timezoneOffsetMinutes);
   }
 
-  /// Returns the canonical lexical representation of this [Year].
+  /// Returns the canonical lexical representation of this [GregorianYear].
   ///
   /// Format is "CCYY" e.g., "2023".
   /// If a timezone is present, it's appended (e.g., "2023Z", "2023+05:30").
@@ -130,13 +127,13 @@ class Year {
     return result;
   }
 
-  /// Creates a new [Year] instance with the given fields updated.
-  Year copyWith({
+  /// Creates a new [GregorianYear] instance with the given fields updated.
+  GregorianYear copyWith({
     int? year,
     int? timezoneOffsetInMinutes,
     bool setToNoTimezone = false, // Special flag to remove timezone
   }) {
-    return Year(
+    return GregorianYear(
       year ?? this.year,
       timezoneOffsetInMinutes:
           timezoneOffsetInMinutes ??
@@ -147,7 +144,7 @@ class Year {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    return other is Year &&
+    return other is GregorianYear &&
         other.year == year &&
         other.timezoneOffsetInMinutes == timezoneOffsetInMinutes;
   }
