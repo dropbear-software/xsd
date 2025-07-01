@@ -17,7 +17,6 @@ void main() {
           Locale.parse('de-Latn-DE-1996'),
         );
         expect(codec.decode('de-DE-x-goethe'), Locale.parse('de-DE-x-goethe'));
-        expect(codec.decode('de-DE-x-goethe'), Locale.parse('de-DE-x-goethe'));
         expect(codec.decode('de-Latf-DE'), Locale.parse('de-Latf-DE'));
         expect(codec.decode('es-013'), Locale.parse('es-013'));
         expect(codec.decode('ru-Cyrl-BY'), Locale.parse('ru-Cyrl-BY'));
