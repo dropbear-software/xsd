@@ -42,11 +42,17 @@ void main() {
 
       test('should allow valid timezone boundaries', () {
         expect(
-          GregorianMonth(1, timezoneOffsetInMinutes: -14 * 60).timezoneOffsetInMinutes,
+          GregorianMonth(
+            1,
+            timezoneOffsetInMinutes: -14 * 60,
+          ).timezoneOffsetInMinutes,
           -840,
         );
         expect(
-          GregorianMonth(1, timezoneOffsetInMinutes: 14 * 60).timezoneOffsetInMinutes,
+          GregorianMonth(
+            1,
+            timezoneOffsetInMinutes: 14 * 60,
+          ).timezoneOffsetInMinutes,
           840,
         );
       });
@@ -87,23 +93,17 @@ void main() {
         },
       );
 
-      test(
-        'should parse valid gMonth string with +14:00 timezone offset',
-        () {
-          final gm = GregorianMonth.parse("--07+14:00");
-          expect(gm.month, 7);
-          expect(gm.timezoneOffsetInMinutes, 14 * 60);
-        },
-      );
+      test('should parse valid gMonth string with +14:00 timezone offset', () {
+        final gm = GregorianMonth.parse("--07+14:00");
+        expect(gm.month, 7);
+        expect(gm.timezoneOffsetInMinutes, 14 * 60);
+      });
 
-      test(
-        'should parse valid gMonth string with -14:00 timezone offset',
-        () {
-          final gm = GregorianMonth.parse("--02-14:00");
-          expect(gm.month, 2);
-          expect(gm.timezoneOffsetInMinutes, -14 * 60);
-        },
-      );
+      test('should parse valid gMonth string with -14:00 timezone offset', () {
+        final gm = GregorianMonth.parse("--02-14:00");
+        expect(gm.month, 2);
+        expect(gm.timezoneOffsetInMinutes, -14 * 60);
+      });
 
       test('should handle whitespace correctly during parsing', () {
         final gm = GregorianMonth.parse("  --04Z  ");
@@ -147,10 +147,7 @@ void main() {
 
       test('should return canonical format with negative timezone offset', () {
         expect(
-          GregorianMonth(
-            9,
-            timezoneOffsetInMinutes: -480,
-          ).toString(), // -08:00
+          GregorianMonth(9, timezoneOffsetInMinutes: -480).toString(), // -08:00
           "--09-08:00",
         );
       });

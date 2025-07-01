@@ -14,8 +14,7 @@ void main() {
 
       test('should decode valid gMonth string with Z timezone', () {
         final result = codec.decode("--05Z");
-        expect(
-            result, equals(GregorianMonth(5, timezoneOffsetInMinutes: 0)));
+        expect(result, equals(GregorianMonth(5, timezoneOffsetInMinutes: 0)));
       });
 
       test(
@@ -42,8 +41,7 @@ void main() {
 
       test('should decode valid gMonth string with whitespace', () {
         final result = codec.decode("  \n --07Z \t ");
-        expect(
-            result, equals(GregorianMonth(7, timezoneOffsetInMinutes: 0)));
+        expect(result, equals(GregorianMonth(7, timezoneOffsetInMinutes: 0)));
       });
 
       test('should throw FormatException for invalid format', () {
@@ -74,30 +72,36 @@ void main() {
         expect(result, "--05Z");
       });
 
-      test('should encode GregorianMonth object with positive timezone offset',
-          () {
-        final result = codec.encode(
-          GregorianMonth(2, timezoneOffsetInMinutes: 330),
-        );
-        expect(result, "--02+05:30");
-      });
+      test(
+        'should encode GregorianMonth object with positive timezone offset',
+        () {
+          final result = codec.encode(
+            GregorianMonth(2, timezoneOffsetInMinutes: 330),
+          );
+          expect(result, "--02+05:30");
+        },
+      );
 
-      test('should encode GregorianMonth object with negative timezone offset',
-          () {
-        final result = codec.encode(
-          GregorianMonth(1, timezoneOffsetInMinutes: -480),
-        );
-        expect(result, "--01-08:00");
-      });
+      test(
+        'should encode GregorianMonth object with negative timezone offset',
+        () {
+          final result = codec.encode(
+            GregorianMonth(1, timezoneOffsetInMinutes: -480),
+          );
+          expect(result, "--01-08:00");
+        },
+      );
     });
 
     group('fuse', () {
-      test('decode.fuse(encode) should be identity for valid GregorianMonth',
-          () {
-        final original = GregorianMonth(3, timezoneOffsetInMinutes: -120);
-        final transformed = codec.decode(codec.encode(original));
-        expect(transformed, equals(original));
-      });
+      test(
+        'decode.fuse(encode) should be identity for valid GregorianMonth',
+        () {
+          final original = GregorianMonth(3, timezoneOffsetInMinutes: -120);
+          final transformed = codec.decode(codec.encode(original));
+          expect(transformed, equals(original));
+        },
+      );
 
       test(
         'decode.fuse(encode) should be identity for GregorianMonth without timezone',

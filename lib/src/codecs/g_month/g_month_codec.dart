@@ -24,7 +24,11 @@ class GregorianMonthDecoder extends Converter<String, GregorianMonth> {
     try {
       return GregorianMonth.parse(input);
     } on FormatException catch (e) {
-      throw FormatException('Invalid gMonth format: "$input". ${e.message}', e.source, e.offset);
+      throw FormatException(
+        'Invalid gMonth format: "$input". ${e.message}',
+        e.source,
+        e.offset,
+      );
     }
   }
 }

@@ -142,7 +142,8 @@ class GregorianMonth {
   }) {
     return GregorianMonth(
       month ?? this.month,
-      timezoneOffsetInMinutes: timezoneOffsetInMinutes ??
+      timezoneOffsetInMinutes:
+          timezoneOffsetInMinutes ??
           (setToNoTimezone ? null : this.timezoneOffsetInMinutes),
     );
   }
