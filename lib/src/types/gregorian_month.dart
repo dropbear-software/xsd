@@ -31,13 +31,15 @@ class GregorianMonth {
         'Month must be between 1 and 12',
       );
     }
+    const minOffset = -14 * 60;
+    const maxOffset = 14 * 60;
     if (timezoneOffsetInMinutes != null) {
-      if (timezoneOffsetInMinutes! < -14 * 60 ||
-          timezoneOffsetInMinutes! > 14 * 60) {
+      if (timezoneOffsetInMinutes! < minOffset ||
+          timezoneOffsetInMinutes! > maxOffset) {
         throw ArgumentError.value(
           timezoneOffsetInMinutes,
           'timezoneOffsetInMinutes',
-          'Timezone offset must be between -PT14H and PT14H (-840 and 840 minutes)',
+          'Timezone offset must be between -PT14H and PT14H ($minOffset and $maxOffset minutes)',
         );
       }
     }
