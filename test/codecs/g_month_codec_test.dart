@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
 import 'package:xsd/src/types/gregorian_month.dart';
-import 'package:xsd/src/codecs/g_month/g_month_codec.dart';
+import 'package:xsd/src/codecs/g_month/gregorian_month_codec.dart';
 
 void main() {
   group('GregorianMonthCodec', () {
