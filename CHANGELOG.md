@@ -14,3 +14,4 @@
 - Implement `xsd:hexBinary` data type codec
 - Implement `xsd:unsignedByte` data type codec
 - Implement `xsd:nonNegativeInteger` data type codec
+- Implement `xsd:long` data type codec
