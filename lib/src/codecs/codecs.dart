@@ -11,3 +11,4 @@ export 'byte/byte_codec.dart';
 export 'base64_binary/base64_binary_codec.dart';
 export 'hex_binary/hex_binary_codec.dart';
 export 'unsigned_byte/unsigned_byte_codec.dart';
+export 'non_negative_integer/non_negative_integer_codec.dart';
