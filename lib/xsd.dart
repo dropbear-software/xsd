@@ -5,4 +5,10 @@ library;
 
 export 'src/xsd_base.dart';
 
-// TODO: Export any libraries intended for clients of this package.
+// Types
+export 'src/types/year_month.dart';
+export 'src/types/year.dart';
+
+// Codecs
+export 'src/codecs/g_year_month/year_month_codec.dart';
+export 'src/codecs/g_year/year_codec.dart';
