@@ -118,22 +118,22 @@ class GregorianMonth {
   /// If a timezone is present, it's appended (e.g., "--05Z", "--12+05:30").
   @override
   String toString() {
-    final String monthString = month.toString().padLeft(2, '0');
-    String result = '--$monthString';
+    final monthString = month.toString().padLeft(2, '0');
+    final buffer = StringBuffer('--$monthString');
 
     if (timezoneOffsetInMinutes != null) {
       if (timezoneOffsetInMinutes == 0) {
-        result += 'Z';
+        buffer.write('Z');
       } else {
         final int offset = timezoneOffsetInMinutes!;
         final String sign = offset.isNegative ? '-' : '+';
         final int absOffset = offset.abs();
         final String hours = (absOffset ~/ 60).toString().padLeft(2, '0');
         final String minutes = (absOffset % 60).toString().padLeft(2, '0');
-        result += '$sign$hours:$minutes';
+        buffer.write('$sign$hours:$minutes');
       }
     }
-    return result;
+    return buffer.toString();
   }
 
   /// Creates a new [GregorianMonth] instance with the given fields updated.
