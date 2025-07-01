@@ -1,5 +1,5 @@
 name: xsd
-description: A starting point for Dart libraries or applications.
+description: A XML Schema Datatypes Interop Library for Dart
 version: 0.1.0-dev
 repository: https://github.com/dropbear-software/xsd
 issue_tracker: https://github.com/dropbear-software/xsd/issues
