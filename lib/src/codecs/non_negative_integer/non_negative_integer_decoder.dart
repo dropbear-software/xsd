@@ -10,7 +10,7 @@ class XsdNonNegativeIntegerDecoder extends Converter<String, BigInt> {
   BigInt convert(String input) {
     final String collapsedInput = processWhiteSpace(input, Whitespace.collapse);
 
-    final RegExp integerPattern = RegExp(r'^[0-9]+$');
+    final RegExp integerPattern = RegExp(r'^[\-\+]?[0-9]+$');
     if (!integerPattern.hasMatch(collapsedInput)) {
       throw FormatException(
         "Invalid XSD nonNegativeInteger lexical format: '$input' (collapsed to '$collapsedInput')",

@@ -8,7 +8,7 @@ const xsdNonNegativeIntegerCodec = XsdNonNegativeIntegerCodec();
 class XsdNonNegativeIntegerCodec extends Codec<BigInt, String> {
   const XsdNonNegativeIntegerCodec();
 
-  static final BigInt minInclusive = BigInt.parse('0');
+  static final BigInt minInclusive = BigInt.zero;
 
   @override
   Converter<String, BigInt> get decoder => const XsdNonNegativeIntegerDecoder();
