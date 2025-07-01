@@ -24,9 +24,9 @@ class XsdLanguageDecoder extends Converter<String, Locale> {
     try {
       final parsedLocale = Locale.parse(collapsedInput);
       return parsedLocale;
-    } catch (e) {
+    } on FormatException catch (e) {
       throw FormatException(
-        "Invalid XSD language lexical format: '$collapsedInput' does not match the required pattern.",
+        "Invalid XSD language lexical format: '$collapsedInput' does not match the required pattern. \nUnderlying error: $e",
       );
     }
   }
