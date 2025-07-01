@@ -29,7 +29,7 @@ This library aims to support the following XSD 1.1 built-in datatypes that are c
 |            `xsd:token` |      ✅      |        ✅        |    `String`    |     `dart:core`    |
 |          `xsd:NMTOKEN` |      ✅      |        ✅        |    `String`    |     `dart:core`    |
 |             `xsd:Name` |      ✅      |        ✅        |    `String`    |     `dart:core`    |
-|         `xsd:language` |      ✅      |        ❌        |    `Locale`    |     `package:intl`    |
+|         `xsd:language` |      ✅      |        ✅        |    `Locale`    |     `package:intl`    |
 |           `xsd:NCName` |      ✅      |        ✅        |    `String`    |     `dart:core`    |
 |          `xsd:decimal` |      ✅      |        ❌        |    `Decimal`    |     `package:decimal`    |
 |           `xsd:double` |      ✅      |        ❌        |    `double`    |     `dart:core`    |

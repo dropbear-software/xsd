@@ -15,3 +15,4 @@
 - Implement `xsd:unsignedByte` data type codec
 - Implement `xsd:nonNegativeInteger` data type codec
 - Implement `xsd:long` data type codec
+- Implement `xsd:language` data type codec
