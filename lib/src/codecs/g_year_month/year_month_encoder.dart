@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import '../../year_month.dart';
+import '../../types/year_month.dart';
 
 /// Encodes a [YearMonth] object into its XSD gYearMonth string representation.
 class YearMonthEncoder extends Converter<YearMonth, String> {

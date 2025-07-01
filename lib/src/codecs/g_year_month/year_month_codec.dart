@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import '../../year_month.dart';
+import '../../types/year_month.dart';
 import 'year_month_decoder.dart';
 import 'year_month_encoder.dart';
 

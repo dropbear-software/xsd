@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import '../../year_month.dart';
+import '../../types/year_month.dart';
 
 /// Decodes a string in XSD gYearMonth format into a [YearMonth] object.
 class YearMonthDecoder extends Converter<String, YearMonth> {
@@ -14,7 +14,11 @@ class YearMonthDecoder extends Converter<String, YearMonth> {
       // Rethrow with a more specific message if desired, or just let it propagate.
       // For consistency with other decoders, we might want to ensure the
       // message clearly indicates it's an XSD gYearMonth decoding issue.
-      throw FormatException('Invalid XSD gYearMonth: ${e.message}', e.source, e.offset);
+      throw FormatException(
+        'Invalid XSD gYearMonth: ${e.message}',
+        e.source,
+        e.offset,
+      );
     }
   }
 }

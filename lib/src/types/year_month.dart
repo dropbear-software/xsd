@@ -1,6 +1,6 @@
 import 'package:meta/meta.dart';
 
-import 'helpers/whitespace.dart';
+import '../helpers/whitespace.dart';
 
 /// Represents an xsd:gYearMonth value.
 ///
@@ -32,12 +32,20 @@ class YearMonth {
   /// The [timezoneOffsetInMinutes], if provided, must be between -840 and 840.
   YearMonth(this.year, this.month, {this.timezoneOffsetInMinutes}) {
     if (month < 1 || month > 12) {
-      throw ArgumentError.value(month, 'month', 'Month must be between 1 and 12');
+      throw ArgumentError.value(
+        month,
+        'month',
+        'Month must be between 1 and 12',
+      );
     }
     if (timezoneOffsetInMinutes != null) {
-      if (timezoneOffsetInMinutes! < -14 * 60 || timezoneOffsetInMinutes! > 14 * 60) {
+      if (timezoneOffsetInMinutes! < -14 * 60 ||
+          timezoneOffsetInMinutes! > 14 * 60) {
         throw ArgumentError.value(
-            timezoneOffsetInMinutes, 'timezoneOffsetInMinutes', 'Timezone offset must be between -PT14H and PT14H');
+          timezoneOffsetInMinutes,
+          'timezoneOffsetInMinutes',
+          'Timezone offset must be between -PT14H and PT14H',
+        );
       }
     }
   }
@@ -49,7 +57,10 @@ class YearMonth {
   ///
   /// Throws a [FormatException] if the input string is not a valid gYearMonth.
   static YearMonth parse(String lexicalForm) {
-    final String collapsedInput = processWhiteSpace(lexicalForm, Whitespace.collapse);
+    final String collapsedInput = processWhiteSpace(
+      lexicalForm,
+      Whitespace.collapse,
+    );
 
     // Regular expression for gYearMonth: CCYY-MM(Z|(+|-)HH:MM)?
     // Year part: -?([1-9][0-9]{3,}|0[0-9]{3})
@@ -62,13 +73,15 @@ class YearMonth {
     // Group 2: month
     // Group 3: timezone (optional, includes Z or +/-HH:MM)
     final RegExp gYearMonthPattern = RegExp(
-        r'^(-?(?:[1-9][0-9]{3,}|0[0-9]{3}))-(0[1-9]|1[0-2])(Z|(?:\+|-)(?:(?:0[0-9]|1[0-3]):[0-5][0-9]|14:00))?$');
+      r'^(-?(?:[1-9][0-9]{3,}|0[0-9]{3}))-(0[1-9]|1[0-2])(Z|(?:\+|-)(?:(?:0[0-9]|1[0-3]):[0-5][0-9]|14:00))?$',
+    );
 
     final Match? match = gYearMonthPattern.firstMatch(collapsedInput);
 
     if (match == null) {
       throw FormatException(
-          "Invalid gYearMonth format: '$lexicalForm' (collapsed to '$collapsedInput')");
+        "Invalid gYearMonth format: '$lexicalForm' (collapsed to '$collapsedInput')",
+      );
     }
 
     final String yearStr = match.group(1)!;
@@ -79,19 +92,28 @@ class YearMonth {
     try {
       year = int.parse(yearStr);
     } catch (e) {
-      throw FormatException("Invalid year component in gYearMonth: '$yearStr'", collapsedInput);
+      throw FormatException(
+        "Invalid year component in gYearMonth: '$yearStr'",
+        collapsedInput,
+      );
     }
 
     final int month;
     try {
       month = int.parse(monthStr);
     } catch (e) {
-      throw FormatException("Invalid month component in gYearMonth: '$monthStr'", collapsedInput);
+      throw FormatException(
+        "Invalid month component in gYearMonth: '$monthStr'",
+        collapsedInput,
+      );
     }
 
     if (month < 1 || month > 12) {
       // This should be caught by the regex, but as a safeguard:
-      throw FormatException("Month value '$monthStr' is out of range (1-12).", collapsedInput);
+      throw FormatException(
+        "Month value '$monthStr' is out of range (1-12).",
+        collapsedInput,
+      );
     }
 
     int? timezoneOffsetMinutes;
@@ -107,7 +129,11 @@ class YearMonth {
       }
     }
 
-    return YearMonth(year, month, timezoneOffsetInMinutes: timezoneOffsetMinutes);
+    return YearMonth(
+      year,
+      month,
+      timezoneOffsetInMinutes: timezoneOffsetMinutes,
+    );
   }
 
   /// Returns the canonical lexical representation of this [YearMonth].
@@ -117,11 +143,14 @@ class YearMonth {
   @override
   String toString() {
     String yearString;
-    if (year < -9999 || year > 9999) { // Years outside -9999 to 9999 require more than 4 digits or a sign
-      yearString = (year < 0 ? '-' : '') + year.abs().toString().padLeft(4, '0');
+    if (year < -9999 || year > 9999) {
+      // Years outside -9999 to 9999 require more than 4 digits or a sign
+      yearString =
+          (year < 0 ? '-' : '') + year.abs().toString().padLeft(4, '0');
     } else if (year >= 0 && year <= 9999) {
       yearString = year.toString().padLeft(4, '0');
-    } else { // year < 0 and year >= -9999
+    } else {
+      // year < 0 and year >= -9999
       yearString = '-${year.abs().toString().padLeft(4, '0')}';
     }
 
@@ -153,7 +182,9 @@ class YearMonth {
     return YearMonth(
       year ?? this.year,
       month ?? this.month,
-      timezoneOffsetInMinutes: timezoneOffsetInMinutes ?? (setToNoTimezone ? null : this.timezoneOffsetInMinutes),
+      timezoneOffsetInMinutes:
+          timezoneOffsetInMinutes ??
+          (setToNoTimezone ? null : this.timezoneOffsetInMinutes),
     );
   }
 
