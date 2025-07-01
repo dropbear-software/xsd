@@ -41,7 +41,7 @@ This library aims to support the following XSD 1.1 built-in datatypes that are c
 | `xsd:int` |      ✅      |        ✅        |    `int`    |     `dart:core`    |
 | `xsd:short` |      ✅      |        ✅        |    `int`    |     `dart:core`    |
 | `xsd:byte` |      ✅      |        ✅        |    `int`    |     `dart:core`    |
-| `xsd:nonNegativeInteger` |      ✅      |        ❌        |    `BigInt`    |     `dart:core`    |
+| `xsd:nonNegativeInteger` |      ✅      |        ✅        |    `BigInt`    |     `dart:core`    |
 | `xsd:positiveInteger` |      ✅      |        ❌        |    `BigInt`    |     `dart:core`    |
 | `xsd:unsignedLong` |      ✅      |        ❌        |    `BigInt`    |     `dart:core`    |
 | `xsd:unsignedInt` |      ✅      |        ❌        |    `int`    |     `dart:core`    |
