@@ -24,7 +24,8 @@ class XmlUnsignedShortDecoder extends Converter<String, int> {
 
     if (value < _minValue || value > _maxValue) {
       throw FormatException(
-          'The value "$value" must be between $_minValue and $_maxValue.');
+        'The value "$value" must be between $_minValue and $_maxValue.',
+      );
     }
 
     return value;

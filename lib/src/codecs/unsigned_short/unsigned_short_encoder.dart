@@ -10,7 +10,8 @@ class XmlUnsignedShortEncoder extends Converter<int, String> {
   String convert(int input) {
     if (input < _minValue || input > _maxValue) {
       throw FormatException(
-          'The value "$input" must be between $_minValue and $_maxValue.');
+        'The value "$input" must be between $_minValue and $_maxValue.',
+      );
     }
 
     return input.toString();
