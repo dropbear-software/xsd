@@ -45,7 +45,7 @@ This library aims to support the following XSD 1.1 built-in datatypes that are c
 | `xsd:positiveInteger` |      ✅      |        ❌        |    `BigInt`    |     `dart:core`    |
 | `xsd:unsignedLong` |      ✅      |        ❌        |    `BigInt`    |     `dart:core`    |
 | `xsd:unsignedInt` |      ✅      |        ❌        |    `int`    |     `dart:core`    |
-| `xsd:unsignedShort` |      ✅      |        ❌        |    `int`    |     `dart:core`    |
+| `xsd:unsignedShort` |      ✅      |        ✅        |    `int`    |     `dart:core`    |
 | `xsd:unsignedByte` |      ✅      |        ✅        |    `int`    |     `dart:core`    |
 | `xsd:anyURI` |      ✅      |        ❌        |    `Uri`    |     `dart:core`    |
 | `xsd:hexBinary` |      ✅      |        ✅        |    `Uint8List`    |     `dart:typed_data`    |
@@ -57,11 +57,11 @@ This library aims to support the following XSD 1.1 built-in datatypes that are c
 | `xsd:dateTimeStamp` |      ✅      |        ❌        |    ???    |     ???    |
 | `xsd:date` |      ✅      |        ❌        |    ???    |     ???    |
 | `xsd:time` |      ✅      |        ❌        |    ???    |     ???    |
-| `xsd:gYearMonth` |      ✅      |        ❌        |    ???    |     ???    |
-| `xsd:gYear` |      ✅      |        ❌        |    ???    |     ???    |
+| `xsd:gYearMonth` |      ✅      |        ✅        |    `YearMonth`    |     `package:xsd`    |
+| `xsd:gYear` |      ✅      |        ✅        |    `GregorianYear`    |     `package:xsd`    |
 | `xsd:gMonthDay` |      ✅      |        ❌        |    ???    |     ???    |
 | `xsd:gDay` |      ✅      |        ❌        |    ???    |     ???    |
-| `xsd:gMonth` |      ✅      |        ❌        |    ???    |     ???    |
+| `xsd:gMonth` |      ✅      |        ✅        |    `GregorianMonth`    |     `package:xsd`    |
 | `xsd:QName` |      ❌      |        ❌        |    ❌    |     ❌    |
 | `xsd:NOTATION` |      ❌      |        ❌        |    ❌    |     ❌    |
 | `xsd:ID` |      ❌      |        ❌        |    ❌    |     ❌    |
