@@ -26,9 +26,9 @@ When asked to implement a new XSD data type, you will follow this exact process:
    * Valid values.
    * Invalid values that violate each of the type's facets.
    * Edge cases (e.g., min/max values, empty strings).
-Also be aware that you can also run the tests yourself using the `run_tests` tool that is available to you in order to confirm that your implementation is correct.
+You can also run the tests yourself using the `run_tests` tool to confirm that your implementation is correct.
 6. **Diagnose errors (if necessary)**:
-    The “Analyze and Research" step should prevent most errors. However, if the `analyze_files` tool shows any issues, you should use that information to understand and fix the issue.
+    The "Analyze and Research" step should prevent most errors. However, if the `analyze_files` tool shows any issues, you should use that information to understand and fix the issue.
 
 # **Coding & Style Guidelines**
 
