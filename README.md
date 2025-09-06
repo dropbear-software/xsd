@@ -35,7 +35,7 @@ This library aims to support the following XSD 1.1 built-in datatypes that are c
 |           `xsd:double` |      ✅      |        ❌        |    `double`    |     `dart:core`    |
 |            `xsd:float` |      ✅      |        ❌        |    `double`    |     `dart:core`    |
 |          `xsd:integer` |      ✅      |        ❌        |    `BigInt`    |     `dart:core`    |
-| `xsd:nonPositiveInteger` |      ✅      |        ❌        |    `BigInt`    |     `dart:core`    |
+| `xsd:nonPositiveInteger` |      ✅      |        ✅        |    `BigInt`    |     `dart:core`    |
 | `xsd:negativeInteger` |      ✅      |        ❌        |    `BigInt`    |     `dart:core`    |
 | `xsd:long` |      ✅      |        ✅        |    `BigInt`    |     `dart:core`    |
 | `xsd:int` |      ✅      |        ✅        |    `int`    |     `dart:core`    |
