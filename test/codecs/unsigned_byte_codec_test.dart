@@ -18,6 +18,10 @@ void main() {
         expect(codec.decode('\n42\t'), 42);
       });
 
+      test('should handle leading zeros correctly', () {
+        expect(codec.decode('007'), 7);
+      });
+
       test('should throw a FormatException for out-of-range values', () {
         expect(() => codec.decode('256'), throwsFormatException);
         expect(() => codec.decode('-1'), throwsFormatException);
