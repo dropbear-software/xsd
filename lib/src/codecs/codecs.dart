@@ -19,3 +19,4 @@ export 'g_month/gregorian_month_codec.dart';
 export 'unsigned_short/unsigned_short_codec.dart';
 export 'positive_integer/positive_integer_codec.dart';
 export 'non_positive_integer/non_positive_integer_codec.dart';
+export 'unsigned_long/unsigned_long_codec.dart';
