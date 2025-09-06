@@ -14,12 +14,14 @@ void main() {
         expect(codec.decode('0'), BigInt.zero);
         expect(codec.decode('12345'), BigInt.from(12345));
         expect(codec.decode('-12345'), BigInt.from(-12345));
+        expect(codec.decode('007'), BigInt.from(7));
         expect(codec.decode(maxLongStr), maxLong);
         expect(codec.decode(minLongStr), minLong);
       });
 
       test('should handle whitespace', () {
         expect(codec.decode('  100  '), BigInt.from(100));
+        expect(codec.decode('\n-456\t'), BigInt.from(-456));
       });
 
       test('should throw FormatException for out-of-range values', () {
