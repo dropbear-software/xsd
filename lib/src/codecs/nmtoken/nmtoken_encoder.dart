@@ -21,7 +21,7 @@ class XsdNmtokenEncoder extends Converter<String, String> {
     // contain any whitespace characters. We don't collapse whitespace on encode,
     // we require the input to be in the correct form.
     if (input.isEmpty) {
-      throw const FormatException(
+      throw FormatException(
         'Invalid xsd:NMTOKEN: The input string cannot be empty.',
       );
     }
