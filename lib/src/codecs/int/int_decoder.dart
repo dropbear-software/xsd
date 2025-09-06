@@ -1,38 +1,29 @@
 import 'dart:convert';
 
 import '../../helpers/whitespace.dart';
-import 'int_codec.dart';
 
 class XsdIntDecoder extends Converter<String, int> {
   const XsdIntDecoder();
+
+  static const int _minValue = -2147483648;
+  static const int _maxValue = 2147483647;
 
   @override
   int convert(String input) {
     final String collapsedInput = processWhiteSpace(input, Whitespace.collapse);
 
-    final RegExp integerPattern = RegExp(r'^[\-\+]?[0-9]+$');
-    if (!integerPattern.hasMatch(collapsedInput)) {
+    final int? value = int.tryParse(collapsedInput);
+    if (value == null) {
       throw FormatException(
         "Invalid XSD int lexical format: '$input' (collapsed to '$collapsedInput')",
       );
     }
 
-    final BigInt? bigIntValue = BigInt.tryParse(collapsedInput);
-    if (bigIntValue == null) {
+    if (value < _minValue || value > _maxValue) {
       throw FormatException(
-        "Failed to parse XSD int: '$input' (collapsed to '$collapsedInput')",
+        "Value '$collapsedInput' is out of range for xsd:int. Must be between $_minValue and $_maxValue.",
       );
     }
-
-    // Check bounds for xsd:int
-    if (bigIntValue < XsdIntCodec.minIntInclusive ||
-        bigIntValue > XsdIntCodec.maxIntInclusive) {
-      throw FormatException(
-        "Value '$collapsedInput' is out of range for xsd:int. Must be between ${XsdIntCodec.minIntInclusive} and ${XsdIntCodec.maxIntInclusive}.",
-      );
-    }
-
-    // BigInt.toInt() will throw if it doesn't fit, but our bounds check should catch it first.
-    return bigIntValue.toInt();
+    return value;
   }
 }
