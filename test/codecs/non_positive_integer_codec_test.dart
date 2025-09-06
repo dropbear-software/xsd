@@ -2,7 +2,7 @@ import 'package:test/test.dart';
 import 'package:xsd/xsd.dart';
 
 void main() {
-  group('XmlNonPositiveIntegerCodec', () {
+  group('XsdNonPositiveIntegerCodec', () {
     const codec = XsdNonPositiveIntegerCodec();
 
     group('decoder', () {
