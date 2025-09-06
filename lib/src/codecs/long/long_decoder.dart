@@ -2,24 +2,28 @@ import 'dart:convert';
 
 import '../../helpers/whitespace.dart';
 
-class XsdLongDecoder extends Converter<String, int> {
+class XsdLongDecoder extends Converter<String, BigInt> {
   const XsdLongDecoder();
 
+  static final BigInt _minValue = BigInt.parse('-9223372036854775808');
+  static final BigInt _maxValue = BigInt.parse('9223372036854775807');
+
   @override
-  int convert(String input) {
+  BigInt convert(String input) {
     final String collapsedInput = processWhiteSpace(input, Whitespace.collapse);
 
-    final int? value = int.tryParse(collapsedInput);
+    final BigInt? value = BigInt.tryParse(collapsedInput);
     if (value == null) {
       throw FormatException(
         "Invalid XSD long lexical format: '$input' (collapsed to '$collapsedInput')",
       );
     }
 
-    // Since Dart's `int` is a 64-bit signed integer, `int.tryParse` will have
-    // already handled the overflow for values outside the 64-bit range.
-    // Therefore, no explicit min/max check is required here as it's implicitly
-    // handled by the Dart runtime.
+    if (value < _minValue || value > _maxValue) {
+      throw FormatException(
+        "Value '$collapsedInput' is out of range for xsd:long. Must be between $_minValue and $_maxValue.",
+      );
+    }
 
     return value;
   }

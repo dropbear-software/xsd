@@ -1,13 +1,18 @@
 import 'dart:convert';
 
-class XsdLongEncoder extends Converter<int, String> {
+class XsdLongEncoder extends Converter<BigInt, String> {
   const XsdLongEncoder();
 
+  static final BigInt _minValue = BigInt.parse('-9223372036854775808');
+  static final BigInt _maxValue = BigInt.parse('9223372036854775807');
+
   @override
-  String convert(int input) {
-    // Dart's `int` is a 64-bit signed integer, which is the exact definition of
-    // xsd:long. Therefore, any `int` value is valid and no range checking is
-    // required.
+  String convert(BigInt input) {
+    if (input < _minValue || input > _maxValue) {
+      throw FormatException(
+        "Value '$input' is out of range for xsd:long. Must be between $_minValue and $_maxValue.",
+      );
+    }
     return input.toString();
   }
 }

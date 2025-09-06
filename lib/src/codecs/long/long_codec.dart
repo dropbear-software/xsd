@@ -5,12 +5,12 @@ import 'long_encoder.dart';
 
 const xsdLongCodec = XsdLongCodec();
 
-class XsdLongCodec extends Codec<int, String> {
+class XsdLongCodec extends Codec<BigInt, String> {
   const XsdLongCodec();
 
   @override
-  Converter<String, int> get decoder => const XsdLongDecoder();
+  Converter<String, BigInt> get decoder => const XsdLongDecoder();
 
   @override
-  Converter<int, String> get encoder => const XsdLongEncoder();
+  Converter<BigInt, String> get encoder => const XsdLongEncoder();
 }

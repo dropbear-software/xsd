@@ -4,31 +4,29 @@ import 'package:xsd/src/codecs/long/long_codec.dart';
 void main() {
   group('XsdLongCodec', () {
     const codec = xsdLongCodec;
-    const minLongStr = '-9223372036854775808';
-    const maxLongStr = '9223372036854775807';
-    final minLongInt = int.parse(minLongStr);
-    final maxLongInt = int.parse(maxLongStr);
+    final minLongStr = '-9223372036854775808';
+    final maxLongStr = '9223372036854775807';
+    final minLong = BigInt.parse(minLongStr);
+    final maxLong = BigInt.parse(maxLongStr);
 
     group('decoder', () {
       test('should decode valid long strings', () {
-        expect(codec.decode('0'), 0);
-        expect(codec.decode('12345'), 12345);
-        expect(codec.decode('-12345'), -12345);
-        expect(codec.decode(maxLongStr), maxLongInt);
-        expect(codec.decode(minLongStr), minLongInt);
+        expect(codec.decode('0'), BigInt.zero);
+        expect(codec.decode('12345'), BigInt.from(12345));
+        expect(codec.decode('-12345'), BigInt.from(-12345));
+        expect(codec.decode(maxLongStr), maxLong);
+        expect(codec.decode(minLongStr), minLong);
       });
 
       test('should handle whitespace', () {
-        expect(codec.decode('  100  '), 100);
+        expect(codec.decode('  100  '), BigInt.from(100));
       });
 
       test('should throw FormatException for out-of-range values', () {
-        // One more than max
-        final overMax = BigInt.parse(maxLongStr) + BigInt.one;
+        final overMax = maxLong + BigInt.one;
         expect(() => codec.decode(overMax.toString()), throwsFormatException);
 
-        // One less than min
-        final underMin = BigInt.parse(minLongStr) - BigInt.one;
+        final underMin = minLong - BigInt.one;
         expect(() => codec.decode(underMin.toString()), throwsFormatException);
       });
 
@@ -40,12 +38,20 @@ void main() {
     });
 
     group('encoder', () {
-      test('should encode valid int values', () {
-        expect(codec.encode(0), '0');
-        expect(codec.encode(12345), '12345');
-        expect(codec.encode(-12345), '-12345');
-        expect(codec.encode(maxLongInt), maxLongStr);
-        expect(codec.encode(minLongInt), minLongStr);
+      test('should encode valid BigInt values', () {
+        expect(codec.encode(BigInt.zero), '0');
+        expect(codec.encode(BigInt.from(12345)), '12345');
+        expect(codec.encode(BigInt.from(-12345)), '-12345');
+        expect(codec.encode(maxLong), maxLongStr);
+        expect(codec.encode(minLong), minLongStr);
+      });
+
+      test('should throw FormatException for out-of-range values', () {
+        final overMax = maxLong + BigInt.one;
+        expect(() => codec.encode(overMax), throwsFormatException);
+
+        final underMin = minLong - BigInt.one;
+        expect(() => codec.encode(underMin), throwsFormatException);
       });
     });
   });
