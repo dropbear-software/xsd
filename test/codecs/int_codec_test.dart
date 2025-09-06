@@ -51,8 +51,6 @@ void main() {
       });
 
       test('should throw FormatException for out-of-range values', () {
-        // Values are tested as BigInts to avoid overflow on native platforms
-        // when creating the test value itself.
         final overMax = maxInt + 1;
         expect(() => codec.encode(overMax), throwsFormatException);
 
