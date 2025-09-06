@@ -20,6 +20,11 @@ void main() {
         );
       });
 
+      test('should handle whitespace during decoding', () {
+        expect(codec.decode('  123  '), BigInt.from(123));
+        expect(codec.decode('\n\t+123  '), BigInt.from(123));
+      });
+
       test('should throw a FormatException for zero', () {
         expect(() => codec.decode('0'), throwsFormatException);
       });
