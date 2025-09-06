@@ -1,37 +1,30 @@
 import 'dart:convert';
 
 import '../../helpers/whitespace.dart';
-import 'long_codec.dart';
 
 class XsdLongDecoder extends Converter<String, BigInt> {
   const XsdLongDecoder();
+
+  static final BigInt _minValue = BigInt.parse('-9223372036854775808');
+  static final BigInt _maxValue = BigInt.parse('9223372036854775807');
 
   @override
   BigInt convert(String input) {
     final String collapsedInput = processWhiteSpace(input, Whitespace.collapse);
 
-    final RegExp integerPattern = RegExp(r'^[\-\+]?[0-9]+$');
-    if (!integerPattern.hasMatch(collapsedInput)) {
+    final BigInt? value = BigInt.tryParse(collapsedInput);
+    if (value == null) {
       throw FormatException(
         "Invalid XSD long lexical format: '$input' (collapsed to '$collapsedInput')",
       );
     }
 
-    final BigInt? bigIntValue = BigInt.tryParse(collapsedInput);
-    if (bigIntValue == null) {
+    if (value < _minValue || value > _maxValue) {
       throw FormatException(
-        "Failed to parse XSD long: '$input' (collapsed to '$collapsedInput')",
+        "Value '$collapsedInput' is out of range for xsd:long. Must be between $_minValue and $_maxValue.",
       );
     }
 
-    // Check bounds for xsd:long
-    if (bigIntValue < XsdLongCodec.minInclusive ||
-        bigIntValue > XsdLongCodec.maxInclusive) {
-      throw FormatException(
-        "Value '$collapsedInput' is out of range for xsd:long. Must be between ${XsdLongCodec.minInclusive} and ${XsdLongCodec.maxInclusive}.",
-      );
-    }
-
-    return bigIntValue;
+    return value;
   }
 }

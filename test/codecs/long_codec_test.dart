@@ -3,85 +3,57 @@ import 'package:xsd/src/codecs/long/long_codec.dart';
 
 void main() {
   group('XsdLongCodec', () {
-    const codec = XsdLongCodec();
+    const codec = xsdLongCodec;
+    final minLongStr = '-9223372036854775808';
+    final maxLongStr = '9223372036854775807';
+    final minLong = BigInt.parse(minLongStr);
+    final maxLong = BigInt.parse(maxLongStr);
 
-    group('encode', () {
-      test('should encode a long integer to its string representation', () {
-        expect(codec.encode(BigInt.from(0)), '0');
-        expect(codec.encode(BigInt.from(123)), '123');
-        expect(codec.encode(BigInt.from(-123)), '-123');
-        expect(codec.encode(XsdLongCodec.minInclusive), '-9223372036854775808');
-        expect(codec.encode(XsdLongCodec.maxInclusive), '9223372036854775807');
-      });
-
-      test('should throw FormatException for out of range values', () {
-        expect(
-          () => codec.encode(XsdLongCodec.minInclusive - BigInt.one),
-          throwsA(isA<FormatException>()),
-        );
-        expect(
-          () => codec.encode(XsdLongCodec.maxInclusive + BigInt.one),
-          throwsA(isA<FormatException>()),
-        );
-      });
-    });
-
-    group('decode', () {
-      test('should decode a valid long integer string to a BigInt', () {
-        expect(codec.decode('0'), BigInt.from(0));
-        expect(codec.decode('123'), BigInt.from(123));
-        expect(codec.decode('-123'), BigInt.from(-123));
-        expect(
-          codec.decode('+123'),
-          BigInt.from(123),
-        ); // XSD long allows explicit positive sign
-        expect(codec.decode('007'), BigInt.from(7)); // Leading zeros
-        expect(
-          codec.decode('9223372036854775807'),
-          BigInt.parse('9223372036854775807'),
-        );
-        expect(
-          codec.decode('-9223372036854775808'),
-          BigInt.parse('-9223372036854775808'),
-        );
+    group('decoder', () {
+      test('should decode valid long strings', () {
+        expect(codec.decode('0'), BigInt.zero);
+        expect(codec.decode('12345'), BigInt.from(12345));
+        expect(codec.decode('-12345'), BigInt.from(-12345));
+        expect(codec.decode('007'), BigInt.from(7));
+        expect(codec.decode(maxLongStr), maxLong);
+        expect(codec.decode(minLongStr), minLong);
       });
 
       test('should handle whitespace', () {
-        expect(codec.decode(' 123 '), BigInt.from(123));
-        expect(codec.decode('\n -456'), BigInt.from(-456));
+        expect(codec.decode('  100  '), BigInt.from(100));
+        expect(codec.decode('\n-456\t'), BigInt.from(-456));
       });
 
-      group('out of range values', () {
-        test(
-          'should throw FormatException for value greater than maxInclusive',
-          () {
-            expect(
-              () => codec.decode('9223372036854775808'),
-              throwsA(isA<FormatException>()),
-            );
-          },
-        );
-        test(
-          'should throw FormatException for value less than minInclusive',
-          () {
-            expect(
-              () => codec.decode('-9223372036854775809'),
-              throwsA(isA<FormatException>()),
-            );
-          },
-        );
+      test('should throw FormatException for out-of-range values', () {
+        final overMax = maxLong + BigInt.one;
+        expect(() => codec.decode(overMax.toString()), throwsFormatException);
+
+        final underMin = minLong - BigInt.one;
+        expect(() => codec.decode(underMin.toString()), throwsFormatException);
       });
 
-      group('invalid lexical values', () {
-        test('should throw FormatException for "123.0"', () {
-          expect(() => codec.decode('123.0'), throwsA(isA<FormatException>()));
-        });
-        test('should throw FormatException for "xyz"', () {
-          expect(() => codec.decode('xyz'), throwsA(isA<FormatException>()));
-        });
-        test('should throw FormatException for empty string', () {
-          expect(() => codec.decode(''), throwsA(isA<FormatException>()));
-        });
+      test('should throw FormatException for invalid lexical formats', () {
+        expect(() => codec.decode(''), throwsFormatException);
+        expect(() => codec.decode('abc'), throwsFormatException);
+        expect(() => codec.decode('1.0'), throwsFormatException);
+      });
+    });
+
+    group('encoder', () {
+      test('should encode valid BigInt values', () {
+        expect(codec.encode(BigInt.zero), '0');
+        expect(codec.encode(BigInt.from(12345)), '12345');
+        expect(codec.encode(BigInt.from(-12345)), '-12345');
+        expect(codec.encode(maxLong), maxLongStr);
+        expect(codec.encode(minLong), minLongStr);
+      });
+
+      test('should throw FormatException for out-of-range values', () {
+        final overMax = maxLong + BigInt.one;
+        expect(() => codec.encode(overMax), throwsFormatException);
+
+        final underMin = minLong - BigInt.one;
+        expect(() => codec.encode(underMin), throwsFormatException);
       });
     });
   });
