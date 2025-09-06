@@ -20,3 +20,4 @@
 - Implement `xsd:gYear` codec and data type
 - Implement `xsd:gMonth` codec and data type
 - Implement `xsd:unsignedShort` data type codec
+- Implement `xsd:positiveInteger` data type codec
