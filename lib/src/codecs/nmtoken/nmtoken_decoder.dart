@@ -5,25 +5,21 @@ import '../../helpers/whitespace.dart';
 /// Decoder for `xsd:NMTOKEN`.
 ///
 /// Converts an XSD NMTOKEN lexical representation to a Dart String.
-/// 1. Collapses whitespace.
-/// 2. Validates against the NMTOKEN pattern (\c+).
+/// 1. Collapses whitespace as per the `xsd:token` derivation.
+/// 2. Validates that the result contains no spaces.
+/// 3. Validates the result against the `Nmtoken` production from XML 1.0.
 class XsdNmtokenDecoder extends Converter<String, String> {
   const XsdNmtokenDecoder();
 
-  // Pattern for \i (initial name characters for xsd:Name, part of \c)
-  // According to XSD Part 2 Appendix F: \i ::= [:A-Z_a-z\p{L}\p{Nl}]
-  // Note: Dart's \p{L} includes Lu, Ll, Lt, Lm, Lo. \p{Nl} is Number, letter.
-  static const String _iChars = r':A-Z_a-z\p{L}\p{Nl}';
-
-  // Pattern for \c (name characters for xsd:NMTOKEN)
-  // According to XSD Part 2 Appendix F: \c ::= [\i\-.0-9\p{M}\p{Lm}\p{Sk}]
-  // \p{M} is Mark, \p{Lm} is Letter, modifier, \p{Sk} is Symbol, modifier.
-  static const String _cCharPattern =
-      r'[' + _iChars + r'\-.0-9\p{M}\p{Lm}\p{Sk}]';
-
-  // NMTOKEN pattern: one or more \c characters. Anchored.
+  // This regex is built to match the `Nmtoken` production from XML 1.0,
+  // which is defined as one or more `NameChar` characters.
+  // The character classes are based on the definitions in Appendix F of the
+  // W3C XML Schema Definition Language (XSD) 1.1 Part 2: Datatypes spec.
+  //
+  // To treat '-' and '.' as literals inside [], '-' is placed at the end,
+  // and '.' is escaped.
   static final RegExp _nmtokenRegExp = RegExp(
-    r'^(' + _cCharPattern + r')+$',
+    r'^[A-Z_a-z:\.\p{L}\p{Nl}\p{Nd}\p{M}\p{Lm}\p{Sk}-]+$',
     unicode: true,
   );
 
@@ -33,13 +29,21 @@ class XsdNmtokenDecoder extends Converter<String, String> {
 
     if (collapsedInput.isEmpty) {
       throw FormatException(
-        "Invalid XSD NMTOKEN: input collapsed to an empty string. Original: '$input'",
+        "Invalid xsd:NMTOKEN: input collapsed to an empty string. Original: '$input'",
+      );
+    }
+
+    // Although the regex below would fail on a space, this check is faster
+    // and provides a clearer error message. A valid NMTOKEN cannot contain spaces.
+    if (collapsedInput.contains(' ')) {
+      throw FormatException(
+        "Invalid xsd:NMTOKEN: The value cannot contain spaces. Collapsed value: '$collapsedInput'",
       );
     }
 
     if (!_nmtokenRegExp.hasMatch(collapsedInput)) {
       throw FormatException(
-        "Invalid XSD NMTOKEN lexical format: '$input' (collapsed to '$collapsedInput') does not match pattern /\\c+/",
+        "Invalid xsd:NMTOKEN lexical format: '$collapsedInput' contains invalid characters.",
       );
     }
     return collapsedInput;
