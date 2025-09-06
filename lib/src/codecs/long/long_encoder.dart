@@ -1,19 +1,13 @@
 import 'dart:convert';
 
-import 'long_codec.dart';
-
-class XsdLongEncoder extends Converter<BigInt, String> {
+class XsdLongEncoder extends Converter<int, String> {
   const XsdLongEncoder();
 
   @override
-  String convert(BigInt input) {
-    // Canonical representation for integer types
-    if (input < XsdLongCodec.minInclusive ||
-        input > XsdLongCodec.maxInclusive) {
-      throw FormatException(
-        "Value '$input' is out of range for xsd:long. Must be between ${XsdLongCodec.minInclusive} and ${XsdLongCodec.maxInclusive}.",
-      );
-    }
+  String convert(int input) {
+    // Dart's `int` is a 64-bit signed integer, which is the exact definition of
+    // xsd:long. Therefore, any `int` value is valid and no range checking is
+    // required.
     return input.toString();
   }
 }
