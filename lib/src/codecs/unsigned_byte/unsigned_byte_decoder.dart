@@ -1,38 +1,29 @@
 import 'dart:convert';
 
 import '../../helpers/whitespace.dart';
-import 'unsigned_byte_codec.dart';
 
 class XsdUnsignedByteDecoder extends Converter<String, int> {
   const XsdUnsignedByteDecoder();
+
+  static const int _minValue = 0;
+  static const int _maxValue = 255;
 
   @override
   int convert(String input) {
     final String collapsedInput = processWhiteSpace(input, Whitespace.collapse);
 
-    // XSD unsignedByte lexical representation: "finite-length sequence of decimal digits (#x30-#x39)"
-    // No sign allowed.
-    final RegExp unsignedBytePattern = RegExp(r'^[0-9]+$');
-    if (!unsignedBytePattern.hasMatch(collapsedInput)) {
+    final int? value = int.tryParse(collapsedInput);
+    if (value == null) {
       throw FormatException(
-        "Invalid XSD unsignedByte lexical format (must be digits only, no sign): '$input' (collapsed to '$collapsedInput')",
+        "Invalid XSD unsignedByte lexical format: '$input' (collapsed to '$collapsedInput')",
       );
     }
 
-    final BigInt? bigIntValue = BigInt.tryParse(collapsedInput);
-    if (bigIntValue == null) {
+    if (value < _minValue || value > _maxValue) {
       throw FormatException(
-        "Failed to parse XSD unsignedByte: '$input' (collapsed to '$collapsedInput')",
+        "Value '$collapsedInput' is out of range for xsd:unsignedByte. Must be between $_minValue and $_maxValue.",
       );
     }
-
-    // Check bounds for xsd:unsignedByte
-    if (bigIntValue < XsdUnsignedByteCodec.minUnsignedByteInclusive ||
-        bigIntValue > XsdUnsignedByteCodec.maxUnsignedByteInclusive) {
-      throw FormatException(
-        "Value '$collapsedInput' is out of range for xsd:unsignedByte. Must be between ${XsdUnsignedByteCodec.minUnsignedByteInclusive} and ${XsdUnsignedByteCodec.maxUnsignedByteInclusive}.",
-      );
-    }
-    return bigIntValue.toInt();
+    return value;
   }
 }
