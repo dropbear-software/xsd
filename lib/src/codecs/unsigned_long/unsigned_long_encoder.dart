@@ -4,7 +4,8 @@ class XsdUnsignedLongEncoder extends Converter<BigInt, String> {
   const XsdUnsignedLongEncoder();
 
   static final BigInt _minValue = BigInt.zero;
-  static final BigInt _maxValue = BigInt.parse('18446744073709551615');
+  // Calculates the maximum value for an unsigned 64-bit integer (2^64 - 1) programmatically.
+  static final BigInt _maxValue = (BigInt.one << 64) - BigInt.one;
 
   @override
   String convert(BigInt input) {
