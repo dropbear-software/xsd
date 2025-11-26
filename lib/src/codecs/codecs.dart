@@ -24,3 +24,4 @@ export 'g_day/g_day_codec.dart';
 export 'g_month_day/gregorian_month_day_codec.dart';
 export 'duration/xsd_duration_codec.dart';
 export 'datetime/xsd_datetime_codec.dart';
+export 'any_uri/any_uri_codec.dart';
