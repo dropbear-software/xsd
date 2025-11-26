@@ -50,7 +50,7 @@ This library aims to support the following XSD 1.1 built-in datatypes that are c
 | `xsd:anyURI` |      ✅      |        ❌        |    `Uri`    |     `dart:core`    |
 | `xsd:hexBinary` |      ✅      |        ✅        |    `Uint8List`    |     `dart:typed_data`    |
 | `xsd:base64Binary` |      ✅      |        ✅        |    `Uint8List`    |     `dart:typed_data`    |
-| `xsd:duration` |      ✅      |        ❌        |    ???    |     ???    |
+| `xsd:duration` |      ✅      |        ✅        |    `XsdDuration`[1]    |     `package:xsd`    |
 | `xsd:yearMonthDuration` |      ✅      |        ❌        |    ???    |     ???    |
 | `xsd:dayTimeDuration` |      ✅      |        ❌        |    ???    |     ???    |
 | `xsd:dateTime` |      ✅      |        ❌        |    ???    |     ???    |
@@ -69,6 +69,8 @@ This library aims to support the following XSD 1.1 built-in datatypes that are c
 | `xsd:ENTITY` |      ❌      |        ❌        |    ❌    |     ❌    |
 | `xsd:ENTITIES` |      ❌      |        ❌        |    ❌    |     ❌    |
 | `xsd:NMTOKENS` |      ❌      |        ❌        |    ❌    |     ❌    |
+
+[1] **Note:** Although Dart already has a `Duration` class it actually represents an entirely different concept to the ISO8600 / XSD idea of a duration which `XsdDuration` implements. 
 
 ## Limitations
 
