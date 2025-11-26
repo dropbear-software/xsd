@@ -21,3 +21,4 @@ export 'positive_integer/positive_integer_codec.dart';
 export 'non_positive_integer/non_positive_integer_codec.dart';
 export 'unsigned_long/unsigned_long_codec.dart';
 export 'g_day/g_day_codec.dart';
+export 'g_month_day/gregorian_month_day_codec.dart';
