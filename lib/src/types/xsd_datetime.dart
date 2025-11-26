@@ -92,7 +92,7 @@ class XsdDateTime implements Comparable<XsdDateTime> {
     if (dt.millisecond > 0 || dt.microsecond > 0) {
       final ms = dt.millisecond.toString().padLeft(3, '0');
       final us = (dt.microsecond > 0)
-          ?  dt.microsecond.toString().padLeft(3, '0')
+          ? dt.microsecond.toString().padLeft(3, '0')
           : '';
       result = '$result.$ms$us';
     }
