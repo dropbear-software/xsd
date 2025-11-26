@@ -59,7 +59,7 @@ This library aims to support the following XSD 1.1 built-in datatypes that are c
 | `xsd:time` |      ✅      |        ❌        |    ???    |     ???    |
 | `xsd:gYearMonth` |      ✅      |        ✅        |    `YearMonth`    |     `package:xsd`    |
 | `xsd:gYear` |      ✅      |        ✅        |    `GregorianYear`    |     `package:xsd`    |
-| `xsd:gMonthDay` |      ✅      |        ❌        |    `GregorianMonthDay`    |     `package:xsd`    |
+| `xsd:gMonthDay` |      ✅      |        ✅        |    `GregorianMonthDay`    |     `package:xsd`    |
 | `xsd:gDay` |      ✅      |        ✅        |    `GregorianDay`    |     `package:xsd`    |
 | `xsd:gMonth` |      ✅      |        ✅        |    `GregorianMonth`    |     `package:xsd`    |
 | `xsd:QName` |      ❌      |        ❌        |    ❌    |     ❌    |
