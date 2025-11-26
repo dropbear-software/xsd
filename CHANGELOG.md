@@ -27,3 +27,4 @@
 - Implement `xsd:gMonthDay` codec and data type
 - Implement `xsd:duration` codec and data type
 - Implement `xsd:datetime` codec and data type
+- Implement `xsd:anyUri` codec
