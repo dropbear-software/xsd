@@ -115,10 +115,10 @@ class GregorianDay {
     final buffer = StringBuffer('---$dayString');
 
     if (timezoneOffsetInMinutes != null) {
-      if (timezoneOffsetInMinutes == 0) {
+      final int offset = timezoneOffsetInMinutes!;
+      if (offset == 0) {
         buffer.write('Z');
       } else {
-        final int offset = timezoneOffsetInMinutes!;
         final String sign = offset.isNegative ? '-' : '+';
         final int absOffset = offset.abs();
         final String hours = (absOffset ~/ 60).toString().padLeft(2, '0');
