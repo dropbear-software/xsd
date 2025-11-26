@@ -71,7 +71,7 @@ This library aims to support the following XSD 1.1 built-in datatypes that are c
 | `xsd:NMTOKENS` |      ❌      |        ❌        |    ❌    |     ❌    |
 
 [1] **Note:** Although Dart already has a `Duration` class it actually represents an entirely different concept to the ISO8600 / XSD idea of a duration which `XsdDuration` implements.
-[2] **Note:** Dart's native `DateTime` class doesn't handle timezones which are an important part of the XSD `dateTime` type, we provide a wrapper class over the native `DateTime` to fix this.
+[2] **Note:** Dart's native `DateTime` class doesn't preserve the original timezone offset from a parsed string, which is important for round-tripping `xsd:dateTime` values. This wrapper class stores the original offset to address this.
 
 ## Limitations
 
