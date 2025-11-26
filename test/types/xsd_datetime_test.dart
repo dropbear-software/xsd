@@ -46,6 +46,14 @@ void main() {
       expect(dt.toString(), '2002-10-10T12:00:00+05:30');
     });
 
+    test('correctly handles fractional seconds', () {
+      final dt = XsdDateTime.parse('2002-10-10T12:00:00.450-05:00');
+      expect(dt.isFloating, isFalse);
+      expect(dt.value.isUtc, isTrue);
+      expect(dt.originalOffset, const Duration(hours: -5));
+      expect(dt.toString(), '2002-10-10T12:00:00.450-05:00');
+    });
+
     test('throws a FormatException on invalid input', () {
       expect(() => XsdDateTime.parse('2002-10-10-'), throwsFormatException);
     });
