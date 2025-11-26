@@ -23,3 +23,4 @@
 - Implement `xsd:positiveInteger` data type codec
 - Implement `xsd:nonPositiveInteger` data type codec
 - Implement `xsd:unsignedLong` data type codec
+- Implement `xsd:gDay` codec and data type
