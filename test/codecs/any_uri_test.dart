@@ -26,5 +26,12 @@ void main() {
         Uri.parse('http://example.com'),
       );
     });
+
+    test('should throw FormatException for invalid URI', () {
+      expect(
+        () => codec.decode('http://example.com::'),
+        throwsA(isA<FormatException>()),
+      );
+    });
   });
 }
