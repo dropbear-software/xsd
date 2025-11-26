@@ -25,7 +25,7 @@ class XsdDateTime implements Comparable<XsdDateTime> {
   final Duration? originalOffset;
 
   XsdDateTime(DateTime value, {this.isFloating = false, this.originalOffset})
-      : value = value.toUtc();
+    : value = value.toUtc();
 
   // Regex to detect timezone presence.
   // Matches Z or +/-HH:MM at the end.

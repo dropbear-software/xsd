@@ -46,7 +46,7 @@ void main() {
       expect(dt.toString(), '2002-10-10T12:00:00+05:30');
     });
 
-    test('throws a FormatException on invalid input', (){
+    test('throws a FormatException on invalid input', () {
       expect(() => XsdDateTime.parse('2002-10-10-'), throwsFormatException);
     });
 
