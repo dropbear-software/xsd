@@ -1,12 +1,10 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import '../../helpers/whitespace.dart';
 
 class XsdUnsignedByteDecoder extends Converter<String, int> {
   const XsdUnsignedByteDecoder();
-
-  static const int _minValue = 0;
-  static const int _maxValue = 255;
 
   @override
   int convert(String input) {
@@ -19,9 +17,13 @@ class XsdUnsignedByteDecoder extends Converter<String, int> {
       );
     }
 
-    if (value < _minValue || value > _maxValue) {
+    // Use Uint8List to validate that the value fits within 8 bits (wraps on overflow).
+    final list = Uint8List(1);
+    list[0] = value;
+
+    if (list[0] != value) {
       throw FormatException(
-        "Value '$collapsedInput' is out of range for xsd:unsignedByte. Must be between $_minValue and $_maxValue.",
+        "Value '$collapsedInput' is out of range for xsd:unsignedByte.",
       );
     }
     return value;
