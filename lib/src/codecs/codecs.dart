@@ -30,3 +30,4 @@ export 'double/double_codec.dart';
 export 'float/float_codec.dart';
 export 'integer/integer_codec.dart';
 export 'unsigned_int/unsigned_int_codec.dart';
+export 'negative_integer/negative_integer_codec.dart';
