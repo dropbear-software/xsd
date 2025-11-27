@@ -34,7 +34,7 @@ This library aims to support the following XSD 1.1 built-in datatypes that are c
 |          `xsd:decimal` |      ✅      |        ✅        |    `Decimal`    |     `package:decimal`    |
 |           `xsd:double` |      ✅      |        ✅        |    `double`    |     `dart:core`    |
 |            `xsd:float` |      ✅      |        ✅        |    `double`    |     `dart:core`    |
-|          `xsd:integer` |      ✅      |        ❌        |    `BigInt`    |     `dart:core`    |
+|          `xsd:integer` |      ✅      |        ✅        |    `BigInt`    |     `dart:core`    |
 | `xsd:nonPositiveInteger` |      ✅      |        ✅        |    `BigInt`    |     `dart:core`    |
 | `xsd:negativeInteger` |      ✅      |        ❌        |    `BigInt`    |     `dart:core`    |
 | `xsd:long` |      ✅      |        ✅        |    `BigInt`    |     `dart:core`    |
@@ -77,7 +77,7 @@ This library aims to support the following XSD 1.1 built-in datatypes that are c
 ## Limitations
 
 * **Facets on Built-in Types**: This library focuses on implementing the XSD built-in datatypes as they are defined in the "XML Schema Part 2: Datatypes" specification. This includes their inherent properties, lexical spaces, value spaces, and any *fixed* facets that define them (e.g., the range of `xsd:byte` or the `whiteSpace` behavior of `xsd:token`).
-    * The library currently **does not** provide a mechanism to dynamically apply arbitrary constraining facets (like `minLength`, `maxLength`, `pattern`, `enumeration`, `totalDigits`, `fractionDigits` beyond what defines a base type) to create new, user-defined derived simple types *at runtime through the codec*. For instance, while `xsd:string` is supported, you cannot pass `maxLength="5"` to the `XsdStringCodec` to validate against this specific restriction dynamically. Such validation would typically be handled by a higher-level XSD schema processor that uses this library for the base datatype conversions.
+* The library currently **does not** provide a mechanism to dynamically apply arbitrary constraining facets (like `minLength`, `maxLength`, `pattern`, `enumeration`, `totalDigits`, `fractionDigits` beyond what defines a base type) to create new, user-defined derived simple types *at runtime through the codec*. For instance, while `xsd:string` is supported, you cannot pass `maxLength="5"` to the `XsdStringCodec` to validate against this specific restriction dynamically. Such validation would typically be handled by a higher-level XSD schema processor that uses this library for the base datatype conversions.
 
 ## Usage
 
