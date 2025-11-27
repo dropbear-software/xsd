@@ -66,6 +66,10 @@ void main() {
         () => XsdDate.parse('2002-10-10-14:01'), // Minute > 00 when hour is 14
         throwsFormatException,
       );
+      expect(
+        () => XsdDate.parse('2002-10-10+05:60'), // Minute > 59
+        throwsFormatException,
+      );
     });
 
     test('equality', () {
