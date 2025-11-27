@@ -20,6 +20,8 @@ void main() {
       expect(() => codec.decode('0'), throwsFormatException);
       expect(() => codec.decode('1'), throwsFormatException);
       expect(() => codec.decode('abc'), throwsFormatException);
+      expect(() => codec.decode(''), throwsFormatException);
+      expect(() => codec.decode('   '), throwsFormatException);
       expect(() => codec.encode(BigInt.zero), throwsFormatException);
       expect(() => codec.encode(BigInt.one), throwsFormatException);
     });
