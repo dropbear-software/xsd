@@ -31,7 +31,7 @@ This library aims to support the following XSD 1.1 built-in datatypes that are c
 |             `xsd:Name` |      ✅      |        ✅        |    `String`    |     `dart:core`    |
 |         `xsd:language` |      ✅      |        ✅        |    `Locale`    |     `package:intl`    |
 |           `xsd:NCName` |      ✅      |        ✅        |    `String`    |     `dart:core`    |
-|          `xsd:decimal` |      ✅      |        ❌        |    `Decimal`    |     `package:decimal`    |
+|          `xsd:decimal` |      ✅      |        ✅        |    `Decimal`    |     `package:decimal`    |
 |           `xsd:double` |      ✅      |        ❌        |    `double`    |     `dart:core`    |
 |            `xsd:float` |      ✅      |        ❌        |    `double`    |     `dart:core`    |
 |          `xsd:integer` |      ✅      |        ❌        |    `BigInt`    |     `dart:core`    |
