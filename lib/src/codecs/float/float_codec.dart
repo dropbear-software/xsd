@@ -33,6 +33,13 @@ class XsdFloatEncoder extends Converter<double, String> {
           'Value $input overflows the 32-bit float range and cannot be encoded.',
         );
       }
+
+      // An underflow to 0 also changes the meaning of the value.
+      if (input != 0.0 && f32[0] == 0.0) {
+        throw ArgumentError(
+          'Value $input underflows the 32-bit float range and cannot be encoded.',
+        );
+      }
     }
 
     if (input.isNaN) return 'NaN';

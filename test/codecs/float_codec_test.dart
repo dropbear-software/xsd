@@ -30,6 +30,20 @@ void main() {
           ),
         );
       });
+
+      test('should throw on values that underflow the float range', () {
+        // A value that underflows to 0 in 32-bit float.
+        expect(
+          () => codec.encode(1.0e-46),
+          throwsA(
+            isA<ArgumentError>().having(
+              (e) => e.message,
+              'message',
+              contains('underflows the 32-bit float range'),
+            ),
+          ),
+        );
+      });
     });
 
     group('decoder', () {
@@ -48,6 +62,8 @@ void main() {
         expect(() => codec.decode('abc'), throwsFormatException);
         expect(() => codec.decode('1.2.3'), throwsFormatException);
         expect(() => codec.decode('INFinity'), throwsFormatException);
+        expect(() => codec.decode('inf'), throwsFormatException);
+        expect(() => codec.decode('-inf'), throwsFormatException);
       });
 
       test(
