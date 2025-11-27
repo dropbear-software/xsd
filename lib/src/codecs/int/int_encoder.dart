@@ -1,17 +1,16 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 class XsdIntEncoder extends Converter<int, String> {
   const XsdIntEncoder();
 
-  static const int _minValue = -2147483648;
-  static const int _maxValue = 2147483647;
-
   @override
   String convert(int input) {
-    if (input < _minValue || input > _maxValue) {
-      throw FormatException(
-        "Value '$input' is out of range for xsd:int. Must be between $_minValue and $_maxValue.",
-      );
+    // Use Int32List to validate that the value fits within 32 bits (wraps on overflow).
+    final list = Int32List(1);
+    list[0] = input;
+    if (list[0] != input) {
+      throw FormatException("Value '$input' is out of range for xsd:int.");
     }
     return input.toString();
   }

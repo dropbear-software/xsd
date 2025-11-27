@@ -1,12 +1,10 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import '../../helpers/whitespace.dart';
 
 class XsdIntDecoder extends Converter<String, int> {
   const XsdIntDecoder();
-
-  static const int _minValue = -2147483648;
-  static const int _maxValue = 2147483647;
 
   @override
   int convert(String input) {
@@ -14,23 +12,18 @@ class XsdIntDecoder extends Converter<String, int> {
 
     final int? value = int.tryParse(collapsedInput);
     if (value == null) {
-      // If int.tryParse fails, it could be a lexical error or a number too large
-      // for a platform int. We use BigInt.tryParse to differentiate.
-      if (BigInt.tryParse(collapsedInput) != null) {
-        // The string is a valid integer, but it's too large to be parsed as a
-        // platform int, so it's definitely out of range for xsd:int.
-        throw FormatException(
-          "Value '$collapsedInput' is out of range for xsd:int. Must be between $_minValue and $_maxValue.",
-        );
-      }
       throw FormatException(
         "Invalid XSD int lexical format: '$input' (collapsed to '$collapsedInput')",
       );
     }
 
-    if (value < _minValue || value > _maxValue) {
+    // Use Int32List to validate that the value fits within 32 bits (wraps on overflow).
+    final list = Int32List(1);
+    list[0] = value;
+
+    if (list[0] != value) {
       throw FormatException(
-        "Value '$collapsedInput' is out of range for xsd:int. Must be between $_minValue and $_maxValue.",
+        "Value '$collapsedInput' is out of range for xsd:int.",
       );
     }
     return value;
