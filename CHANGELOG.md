@@ -33,3 +33,4 @@
 - Implement `xsd:float` codec
 - Implement `xsd:unsignedInt` codec
 - Implement `xsd:integer` codec
+- Implement `xsd:negativeInteger` codec
