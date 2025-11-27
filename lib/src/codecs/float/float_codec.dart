@@ -72,17 +72,16 @@ class XsdFloatDecoder extends Converter<String, double> {
       // Use Float32List to check for overflow.
       final f32 = Float32List(1);
       f32[0] = value;
-      final floatValue = f32[0];
 
       // If the conversion results in infinity, but the original was not, it's an overflow.
-      if (floatValue.isInfinite) {
+      if (f32[0].isInfinite) {
         throw FormatException(
           'The literal "$input" is outside the value range of float (overflow).',
         );
       }
 
       // If the conversion results in 0, but the original was not, it's an underflow.
-      if (value != 0.0 && floatValue == 0.0) {
+      if (value != 0.0 && f32[0] == 0.0) {
         throw FormatException(
           'The literal "$input" is outside the value range of float (underflow).',
         );
