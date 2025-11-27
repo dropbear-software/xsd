@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import '../../helpers/whitespace.dart';
 
-class XmlUnsignedShortDecoder extends Converter<String, int> {
-  const XmlUnsignedShortDecoder();
+class XsdUnsignedShortDecoder extends Converter<String, int> {
+  const XsdUnsignedShortDecoder();
 
   static const int _minValue = 0;
   static const int _maxValue = 65535;

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-class XmlUnsignedShortEncoder extends Converter<int, String> {
-  const XmlUnsignedShortEncoder();
+class XsdUnsignedShortEncoder extends Converter<int, String> {
+  const XsdUnsignedShortEncoder();
 
   static const int _minValue = 0;
   static const int _maxValue = 65535;
