@@ -67,17 +67,19 @@ class XsdDate implements Comparable<XsdDate> {
     if (tzStr == null) {
       return XsdDate(dt, isFloating: true);
     } else {
-      Duration? offset;
+      final Duration offset;
       if (tzStr == 'Z') {
         offset = Duration.zero;
       } else {
-        final tzMatch = _offsetRegex.firstMatch(tzStr);
-        if (tzMatch != null) {
-          final sign = tzMatch.group(1) == '+' ? 1 : -1;
-          final hours = int.parse(tzMatch.group(2)!);
-          final minutes = int.parse(tzMatch.group(3)!);
-          offset = Duration(hours: hours, minutes: minutes) * sign;
+        // _dateRegex ensures tzStr is in [+-]HH:mm format, so a match is guaranteed.
+        final tzMatch = _offsetRegex.firstMatch(tzStr)!;
+        final sign = tzMatch.group(1) == '+' ? 1 : -1;
+        final hours = int.parse(tzMatch.group(2)!);
+        final minutes = int.parse(tzMatch.group(3)!);
+        if (hours > 14 || minutes > 59 || (hours == 14 && minutes != 0)) {
+          throw FormatException('Invalid timezone offset range', input);
         }
+        offset = Duration(hours: hours, minutes: minutes) * sign;
       }
       return XsdDate(dt, isFloating: false, originalOffset: offset);
     }
