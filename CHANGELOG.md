@@ -32,3 +32,4 @@
 - Implement `xsd:double` codec
 - Implement `xsd:float` codec
 - Implement `xsd:unsignedInt` codec
+- Implement `xsd:integer` codec
