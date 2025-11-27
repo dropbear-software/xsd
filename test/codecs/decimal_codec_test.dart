@@ -16,6 +16,10 @@ void main() {
       expect(codec.decode('-123.45'), Decimal.parse('-123.45'));
       expect(codec.decode('  +123.45  '), Decimal.parse('123.45'));
       expect(codec.decode('.45'), Decimal.parse('0.45'));
+      expect(codec.decode('123'), Decimal.parse('123'));
+      expect(codec.decode('+123'), Decimal.parse('123'));
+      expect(codec.decode('-123'), Decimal.parse('-123'));
+      expect(codec.decode('123.'), Decimal.parse('123'));
     });
 
     test('should throw on invalid decimal', () {
