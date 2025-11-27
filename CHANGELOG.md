@@ -35,3 +35,4 @@
 - Implement `xsd:integer` codec
 - Implement `xsd:negativeInteger` codec
 - Implement `xsd:date` codec and data type
+- Implement `xsd:time` codec and data type
