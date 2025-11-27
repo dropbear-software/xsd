@@ -10,6 +10,10 @@ class XsdByteDecoder extends Converter<String, int> {
   int convert(String input) {
     final String collapsedInput = processWhiteSpace(input, Whitespace.collapse);
 
+    if (collapsedInput.isEmpty) {
+      throw const FormatException('The input string cannot be empty.');
+    }
+
     final int? value = int.tryParse(collapsedInput);
     if (value == null) {
       throw FormatException(
