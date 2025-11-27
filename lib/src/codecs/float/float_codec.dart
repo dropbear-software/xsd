@@ -29,14 +29,14 @@ class XsdFloatEncoder extends Converter<double, String> {
       f32[0] = input;
       // An overflow results in INFINITY, which changes the meaning of the value.
       if (f32[0].isInfinite) {
-        throw ArgumentError(
+        throw FormatException(
           'Value $input overflows the 32-bit float range and cannot be encoded.',
         );
       }
 
       // An underflow to 0 also changes the meaning of the value.
       if (input != 0.0 && f32[0] == 0.0) {
-        throw ArgumentError(
+        throw FormatException(
           'Value $input underflows the 32-bit float range and cannot be encoded.',
         );
       }

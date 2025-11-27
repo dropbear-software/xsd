@@ -22,7 +22,7 @@ void main() {
         expect(
           () => codec.encode(double.maxFinite),
           throwsA(
-            isA<ArgumentError>().having(
+            isA<FormatException>().having(
               (e) => e.message,
               'message',
               contains('overflows the 32-bit float range'),
@@ -36,7 +36,7 @@ void main() {
         expect(
           () => codec.encode(1.0e-46),
           throwsA(
-            isA<ArgumentError>().having(
+            isA<FormatException>().having(
               (e) => e.message,
               'message',
               contains('underflows the 32-bit float range'),
