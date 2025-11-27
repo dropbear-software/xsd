@@ -29,3 +29,4 @@
 - Implement `xsd:datetime` codec and data type
 - Implement `xsd:anyUri` codec
 - Implement `xsd:decimal` codec
+- Implement `xsd:double` codec
