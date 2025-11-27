@@ -4,7 +4,7 @@ import 'dart:typed_data';
 class XsdUnsignedShortEncoder extends Converter<int, String> {
   const XsdUnsignedShortEncoder();
 
-   @override
+  @override
   String convert(int input) {
     // Use Uint16List to validate that the value fits within 16 bits (wraps on overflow).
     final list = Uint16List(1);
