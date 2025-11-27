@@ -1,30 +1,35 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import '../../helpers/whitespace.dart';
 
 class XsdShortDecoder extends Converter<String, int> {
   const XsdShortDecoder();
 
-  static const int _minValue = -32768;
-  static const int _maxValue = 32767;
-
   @override
   int convert(String input) {
-    final String collapsedInput = processWhiteSpace(input, Whitespace.collapse);
+    final str = processWhiteSpace(input, Whitespace.collapse);
 
-    final int? value = int.tryParse(collapsedInput);
+    if (str.isEmpty) {
+      throw const FormatException('The input string cannot be empty.');
+    }
+
+    final value = int.tryParse(str);
+
     if (value == null) {
+      throw FormatException('The input "$str" is not a valid integer.');
+    }
+
+    // Use Int16List to validate that the value fits within 16 bits (wraps on overflow).
+    final list = Int16List(1);
+    list[0] = value;
+
+    if (list[0] != value) {
       throw FormatException(
-        "Invalid XSD short lexical format: '$input' (collapsed to '$collapsedInput')",
+        'The value "$value" is out of range for xsd:short.',
       );
     }
 
-    // Check bounds for xsd:short
-    if (value < _minValue || value > _maxValue) {
-      throw FormatException(
-        "Value '$collapsedInput' is out of range for xsd:short. Must be between $_minValue and $_maxValue.",
-      );
-    }
     return value;
   }
 }

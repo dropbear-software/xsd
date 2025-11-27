@@ -2,8 +2,8 @@ import 'package:test/test.dart';
 import 'package:xsd/src/codecs/unsigned_short/unsigned_short_codec.dart';
 
 void main() {
-  test('XML Unsigned Short Codec -> Decode', () {
-    const codec = XmlUnsignedShortCodec();
+  test('XSD Unsigned Short Codec -> Decode', () {
+    const codec = XsdUnsignedShortCodec();
     final decoder = codec.decoder;
 
     expect(decoder.convert('12345'), equals(12345));
@@ -16,7 +16,7 @@ void main() {
   });
 
   test('XML Unsigned Short Codec -> Encode', () {
-    const codec = XmlUnsignedShortCodec();
+    const codec = XsdUnsignedShortCodec();
     final encoder = codec.encoder;
 
     expect(encoder.convert(12345), equals('12345'));

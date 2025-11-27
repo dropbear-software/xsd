@@ -1,12 +1,10 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import '../../helpers/whitespace.dart';
 
-class XmlUnsignedShortDecoder extends Converter<String, int> {
-  const XmlUnsignedShortDecoder();
-
-  static const int _minValue = 0;
-  static const int _maxValue = 65535;
+class XsdUnsignedShortDecoder extends Converter<String, int> {
+  const XsdUnsignedShortDecoder();
 
   @override
   int convert(String input) {
@@ -22,9 +20,13 @@ class XmlUnsignedShortDecoder extends Converter<String, int> {
       throw FormatException('The input "$str" is not a valid integer.');
     }
 
-    if (value < _minValue || value > _maxValue) {
+    // Use Uint16List to validate that the value fits within 16 bits (wraps on overflow).
+    final list = Uint16List(1);
+    list[0] = value;
+
+    if (list[0] != value) {
       throw FormatException(
-        'The value "$value" must be between $_minValue and $_maxValue.',
+        'The value "$value" is out of range for xsd:unsignedShort.',
       );
     }
 
