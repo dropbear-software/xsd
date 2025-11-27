@@ -6,3 +6,4 @@ export 'gregorian_month_day.dart';
 export 'xsd_duration.dart';
 export 'xsd_datetime.dart';
 export 'xsd_date.dart';
+export 'xsd_time.dart';
