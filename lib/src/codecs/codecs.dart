@@ -31,3 +31,4 @@ export 'float/float_codec.dart';
 export 'integer/integer_codec.dart';
 export 'unsigned_int/unsigned_int_codec.dart';
 export 'negative_integer/negative_integer_codec.dart';
+export 'date/xsd_date_codec.dart';

@@ -34,3 +34,4 @@
 - Implement `xsd:unsignedInt` codec
 - Implement `xsd:integer` codec
 - Implement `xsd:negativeInteger` codec
+- Implement `xsd:date` codec and data type
