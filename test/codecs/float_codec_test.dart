@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:test/test.dart';
 import 'package:xsd/xsd.dart';
 
@@ -48,8 +50,10 @@ void main() {
 
     group('decoder', () {
       test('should decode valid float strings', () {
-        expect(codec.decode('123.45'), 123.45);
-        expect(codec.decode(' -123.45 '), -123.45);
+        final f32_123_45 = Float32List(1)..[0] = 123.45;
+        expect(codec.decode('123.45'), f32_123_45[0]);
+        final f32Neg12345 = Float32List(1)..[0] = -123.45;
+        expect(codec.decode(' -123.45 '), f32Neg12345[0]);
         expect(codec.decode('INF'), double.infinity);
         expect(codec.decode(' -INF '), double.negativeInfinity);
         expect(codec.decode('NaN').isNaN, isTrue);
