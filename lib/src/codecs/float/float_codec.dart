@@ -59,35 +59,31 @@ class XsdFloatDecoder extends Converter<String, double> {
     if (trimmed == 'INF') return double.infinity;
     if (trimmed == '-INF') return double.negativeInfinity;
     if (trimmed == 'NaN') return double.nan;
-
     final value = double.tryParse(trimmed);
-
     if (value == null) {
       throw FormatException('Invalid XSD float value: "$input"');
     }
-
-    // Dart's double is 64-bit. We need to validate that the value
-    // fits within the 32-bit float value space as defined by XSD.
     if (value.isFinite) {
-      // Use Float32List to check for overflow.
+      // Use Float32List to force rounding to 32-bit precision
       final f32 = Float32List(1);
       f32[0] = value;
-
-      // If the conversion results in infinity, but the original was not, it's an overflow.
+      // Check for overflow (if 32-bit rounded value became infinite)
       if (f32[0].isInfinite) {
         throw FormatException(
           'The literal "$input" is outside the value range of float (overflow).',
         );
       }
-
-      // If the conversion results in 0, but the original was not, it's an underflow.
+      // Check for underflow (if 32-bit rounded value became zero but original wasn't)
+      // Note: We compare f32[0] because that's the value we are about to return.
       if (value != 0.0 && f32[0] == 0.0) {
         throw FormatException(
           'The literal "$input" is outside the value range of float (underflow).',
         );
       }
-    }
 
+      // FIX: Return the 32-bit rounded value.
+      return f32[0];
+    }
     return value;
   }
 }
