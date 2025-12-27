@@ -50,10 +50,10 @@ void main() {
 
     group('decoder', () {
       test('should decode valid float strings', () {
-        final f32_123_45 = Float32List(1)..[0] = 123.45;
-        expect(codec.decode('123.45'), f32_123_45[0]);
-        final f32Neg12345 = Float32List(1)..[0] = -123.45;
-        expect(codec.decode(' -123.45 '), f32Neg12345[0]);
+        double toFloat32(double value) => (Float32List(1)..[0] = value)[0];
+
+        expect(codec.decode('123.45'), toFloat32(123.45));
+        expect(codec.decode(' -123.45 '), toFloat32(-123.45));
         expect(codec.decode('INF'), double.infinity);
         expect(codec.decode(' -INF '), double.negativeInfinity);
         expect(codec.decode('NaN').isNaN, isTrue);
