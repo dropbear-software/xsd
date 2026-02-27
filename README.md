@@ -57,7 +57,7 @@ We are incrementally implementing the RDF-compatible subset of XSD 1.1 types:
 | :--- | :--- | :--- | :--- |
 | **Core types** | `xsd:string` | 🏗️ | `String` |
 | | `xsd:boolean` | ✅ | `bool` |
-| | `xsd:decimal` | 🏗️ | `XsdDecimal` |
+| | `xsd:decimal` | ✅ | `XsdDecimal` |
 | | `xsd:integer` | 🏗️ | `BigInt` |
 | **IEEE Floating-Point** | `xsd:double` | 🏗️ | `double` |
 | | `xsd:float` | 🏗️ | `double` |
