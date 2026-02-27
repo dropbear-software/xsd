@@ -59,7 +59,7 @@ We are incrementally implementing the RDF-compatible subset of XSD 1.1 types:
 | | `xsd:boolean` | ✅ | `bool` |
 | | `xsd:decimal` | ✅ | `XsdDecimal` |
 | | `xsd:integer` | 🏗️ | `BigInt` |
-| **IEEE Floating-Point** | `xsd:double` | 🏗️ | `double` |
+| **IEEE Floating-Point** | `xsd:double` | ✅ | `double` |
 | | `xsd:float` | 🏗️ | `double` |
 | **Time and Date** | `xsd:date` | 🏗️ | `XsdDate` |
 | | `xsd:time` | 🏗️ | `XsdTime` |

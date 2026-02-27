@@ -1,6 +1,7 @@
 import '../codecs/boolean.dart';
 import '../codecs/byte.dart';
 import '../codecs/decimal.dart';
+import '../codecs/double.dart';
 
 /// Global facade for XSD codecs.
 const xsd = XsdFacade._();
@@ -17,4 +18,7 @@ class XsdFacade {
 
   /// Codec for `xsd:decimal`.
   XsdDecimalCodec get decimal => const XsdDecimalCodec();
+
+  /// Codec for `xsd:double`.
+  XsdDoubleCodec get double => const XsdDoubleCodec();
 }
