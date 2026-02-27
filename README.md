@@ -1,39 +1,88 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# XSD for Dart
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages). 
+Strict, lossless, and platform-consistent implementations of W3C XSD 1.1 Datatypes for Dart.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages). 
--->
+[![Pub Version](https://img.shields.io/pub/v/xsd)](https://pub.dev/packages/xsd)
+[![Dart SDK Version](https://img.shields.io/static/v1?label=sdk&message=%5E3.10.0&color=blue)](https://dart.dev/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-purple.svg)](https://opensource.org/licenses/MIT)
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+`xsd` aims to be the standard library for high-fidelity XSD 1.1 datatype handling in Dart. It eliminates the "impedance mismatch" between Dart's pragmatic types and XSD's strict lexical requirements, ensuring that data remains consistent and uncorrupted across all Dart platforms, including the Web.
 
-## Features
+## Key Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- **Unified Codec System:** A global `xsd` namespace providing `decode()` (lexical to Dart) and `encode()` (Dart to canonical lexical form) for every supported type.
+- **Platform-Safe Numeric Types:** Built to handle 64-bit and unbounded integers (using `BigInt`) and arbitrary precision decimals to prevent data loss on the Web.
+- **Strict Lexical Fidelity:** Guaranteed generation of W3C Canonical Lexical Forms.
+- **Strict Whitespace Normalization:** Dedicated infrastructure for `preserve`, `replace`, and `collapse` strategies, strictly following W3C XSD 1.1 rules.
+- **RDF 1.2 Compatibility:** Focused support for the subset of XSD types recommended for RDF systems.
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Add `xsd` to your `pubspec.yaml`:
+
+```yaml
+dependencies:
+  xsd: ^0.1.0
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+The library provides a global `xsd` facade to access all codecs in a consistent way.
 
 ```dart
-const like = 'sample';
+import 'package:xsd/xsd.dart';
+
+void main() {
+  // Decoding xsd:boolean
+  // Supports 'true', 'false', '1', '0' and handles whitespace collapse
+  final isEnabled = xsd.boolean.decode(' 1 '); // returns true
+  
+  // Encoding to Canonical Lexical Form ('true' or 'false')
+  final lexical = xsd.boolean.encode(false);   // returns 'false'
+
+  // Handling Validation Errors
+  try {
+    xsd.boolean.decode('not-a-boolean');
+  } on XsdValidationException catch (e) {
+    print('Validation failed: ${e.message}');
+  }
+}
 ```
 
-## Additional information
+## Supported Datatypes
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+We are incrementally implementing the RDF-compatible subset of XSD 1.1 types:
+
+| Category | Type | Status | Dart Type |
+| :--- | :--- | :--- | :--- |
+| **Core types** | `xsd:string` | 🏗️ | `String` |
+| | `xsd:boolean` | ✅ | `bool` |
+| | `xsd:decimal` | 🏗️ | `XsdDecimal` |
+| | `xsd:integer` | 🏗️ | `BigInt` |
+| **IEEE Floating-Point** | `xsd:double` | 🏗️ | `double` |
+| | `xsd:float` | 🏗️ | `double` |
+| **Time and Date** | `xsd:date` | 🏗️ | `XsdDate` |
+| | `xsd:time` | 🏗️ | `XsdTime` |
+| | `xsd:dateTime` | 🏗️ | `DateTime` |
+| | `xsd:dateTimeStamp` | 🏗️ | `DateTime` |
+| **Partial Dates** | `xsd:gYear` | 🏗️ | `int` |
+| | `xsd:gMonth` | 🏗️ | `int` |
+| | `xsd:gDay` | 🏗️ | `int` |
+| | `xsd:gYearMonth` | 🏗️ | `XsdYearMonth` |
+| | `xsd:gMonthDay` | 🏗️ | `XsdMonthDay` |
+| **Durations** | `xsd:duration` | 🏗️ | `XsdDuration` |
+| | `xsd:yearMonthDuration` | 🏗️ | `XsdDuration` |
+| | `xsd:dayTimeDuration` | 🏗️ | `XsdDuration` |
+| **Limited-range Integers** | `xsd:byte`, `xsd:short`, `xsd:int`, `xsd:long` | 🏗️ | `int` / `BigInt` |
+| | `xsd:unsignedByte`, `xsd:unsignedShort`, `xsd:unsignedInt`, `xsd:unsignedLong` | 🏗️ | `int` / `BigInt` |
+| | `xsd:positiveInteger`, `xsd:nonNegativeInteger` | 🏗️ | `BigInt` |
+| | `xsd:negativeInteger`, `xsd:nonPositiveInteger` | 🏗️ | `BigInt` |
+| **Encoded Binary** | `xsd:hexBinary` | 🏗️ | `Uint8List` |
+| | `xsd:base64Binary` | 🏗️ | `Uint8List` |
+| **Miscellaneous** | `xsd:anyURI` | 🏗️ | `Uri` |
+| | `xsd:language`, `xsd:token`, `xsd:NMTOKEN` | 🏗️ | `String` |
+| | `xsd:Name`, `xsd:NCName`, `xsd:normalizedString` | 🏗️ | `String` |
+
+## Compliance
+
+`xsd` targets a **100% pass rate** against the W3C XSD 1.1 Test Suite for lexical-to-value and value-to-lexical mappings of all supported types. We guarantee platform parity, ensuring identical behavior between the Dart VM and JavaScript (Web).
