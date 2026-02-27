@@ -73,15 +73,27 @@ We are incrementally implementing the RDF-compatible subset of XSD 1.1 types:
 | **Durations** | `xsd:duration` | 🏗️ | `XsdDuration` |
 | | `xsd:yearMonthDuration` | 🏗️ | `XsdDuration` |
 | | `xsd:dayTimeDuration` | 🏗️ | `XsdDuration` |
-| **Limited-range Integers** | `xsd:byte`, `xsd:short`, `xsd:int`, `xsd:long` | 🏗️ | `int` / `BigInt` |
-| | `xsd:unsignedByte`, `xsd:unsignedShort`, `xsd:unsignedInt`, `xsd:unsignedLong` | 🏗️ | `int` / `BigInt` |
-| | `xsd:positiveInteger`, `xsd:nonNegativeInteger` | 🏗️ | `BigInt` |
-| | `xsd:negativeInteger`, `xsd:nonPositiveInteger` | 🏗️ | `BigInt` |
+| **Limited-range Integers** | `xsd:byte` | ✅ | `XsdByte` |
+| | `xsd:short` | 🏗️ | `int` |
+| | `xsd:int` | 🏗️ | `int` |
+| | `xsd:long` | 🏗️ | `int` / `BigInt` |
+| | `xsd:unsignedByte` | 🏗️ | `int` |
+| | `xsd:unsignedShort` | 🏗️ | `int` |
+| | `xsd:unsignedInt` | 🏗️ | `int` |
+| | `xsd:unsignedLong` | 🏗️ | `BigInt` |
+| | `xsd:positiveInteger` | 🏗️ | `BigInt` |
+| | `xsd:nonNegativeInteger` | 🏗️ | `BigInt` |
+| | `xsd:negativeInteger` | 🏗️ | `BigInt` |
+| | `xsd:nonPositiveInteger` | 🏗️ | `BigInt` |
 | **Encoded Binary** | `xsd:hexBinary` | 🏗️ | `Uint8List` |
 | | `xsd:base64Binary` | 🏗️ | `Uint8List` |
 | **Miscellaneous** | `xsd:anyURI` | 🏗️ | `Uri` |
-| | `xsd:language`, `xsd:token`, `xsd:NMTOKEN` | 🏗️ | `String` |
-| | `xsd:Name`, `xsd:NCName`, `xsd:normalizedString` | 🏗️ | `String` |
+| | `xsd:language` | 🏗️ | `String` |
+| | `xsd:token` | 🏗️ | `String` |
+| | `xsd:NMTOKEN` | 🏗️ | `String` |
+| | `xsd:Name` | 🏗️ | `String` |
+| | `xsd:NCName` | 🏗️ | `String` |
+| | `xsd:normalizedString` | 🏗️ | `String` |
 
 ## Compliance
 
