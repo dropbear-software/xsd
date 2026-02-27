@@ -6,13 +6,19 @@ import '../core/xsd_codec.dart';
 ///
 /// Value space: Integers in the range `[-2147483648, 2147483647]`.
 extension type const XsdInt._(int value) implements int {
+  /// The minimum value for an `xsd:int`, equal to -2^31.
+  static const int min = -2147483648;
+
+  /// The maximum value for an `xsd:int`, equal to 2^31 - 1.
+  static const int max = 2147483647;
+
   /// Validates and creates an [XsdInt].
   ///
   /// Throws an [ArgumentError] if the value is outside the range
   /// `[-2147483648, 2147483647]`.
   factory XsdInt(int value) {
-    if (value < -2147483648 || value > 2147483647) {
-      throw RangeError.range(value, -2147483648, 2147483647, 'XsdInt');
+    if (value < min || value > max) {
+      throw RangeError.range(value, min, max, 'XsdInt');
     }
     return XsdInt._(value);
   }
@@ -70,14 +76,16 @@ class XsdIntDecoder extends XsdConverter<String, XsdInt> {
 
     final value = int.parse(input);
 
-    if (value < -2147483648 || value > 2147483647) {
+    try {
+      return XsdInt(value);
+      // In this particular case it does make sense to catch the RangeError
+      // ignore: avoid_catching_errors
+    } on RangeError catch (e) {
       throw XsdValidationException(
-        'Value out of range for xsd:int: $value',
+        'Value out of range for xsd:int: ${e.invalidValue}',
         input: input,
         type: 'xsd:int',
       );
     }
-
-    return XsdInt.unsafe(value);
   }
 }
