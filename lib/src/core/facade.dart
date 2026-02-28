@@ -3,6 +3,7 @@ import '../codecs/byte.dart';
 import '../codecs/decimal.dart';
 import '../codecs/double.dart';
 import '../codecs/int.dart';
+import '../codecs/integer.dart';
 
 /// Global facade for XSD codecs.
 const xsd = XsdFacade._();
@@ -25,4 +26,7 @@ class XsdFacade {
 
   /// Codec for `xsd:int`.
   XsdIntCodec get int => const XsdIntCodec();
+
+  /// Codec for `xsd:integer`.
+  XsdIntegerCodec get integer => const XsdIntegerCodec();
 }
