@@ -6,12 +6,18 @@ import '../core/xsd_codec.dart';
 ///
 /// Value space: Integers in the range `[-128, 127]`.
 extension type const XsdByte._(int value) implements int {
+  /// The minimum value for an `xsd:byte`, equal to -128.
+  static const int min = -128;
+
+  /// The maximum value for an `xsd:byte`, equal to 127.
+  static const int max = 127;
+
   /// Validates and creates an [XsdByte].
   ///
   /// Throws an [ArgumentError] if the value is outside the range `[-128, 127]`.
   factory XsdByte(int value) {
-    if (value < -128 || value > 127) {
-      throw RangeError.range(value, -128, 127, 'XsdByte');
+    if (value < min || value > max) {
+      throw RangeError.range(value, min, max, 'XsdByte');
     }
     return XsdByte._(value);
   }
@@ -69,14 +75,13 @@ class XsdByteDecoder extends XsdConverter<String, XsdByte> {
 
     final value = int.parse(input);
 
-    if (value < -128 || value > 127) {
+    if (value < XsdByte.min || value > XsdByte.max) {
       throw XsdValidationException(
         'Value out of range for xsd:byte: $value',
         input: input,
         type: 'xsd:byte',
       );
     }
-
     return XsdByte.unsafe(value);
   }
 }

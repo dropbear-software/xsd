@@ -76,16 +76,13 @@ class XsdIntDecoder extends XsdConverter<String, XsdInt> {
 
     final value = int.parse(input);
 
-    try {
-      return XsdInt(value);
-      // In this particular case it does make sense to catch the RangeError
-      // ignore: avoid_catching_errors
-    } on RangeError catch (e) {
+    if (value < XsdInt.min || value > XsdInt.max) {
       throw XsdValidationException(
-        'Value out of range for xsd:int: ${e.invalidValue}',
+        'Value out of range for xsd:int: $value',
         input: input,
         type: 'xsd:int',
       );
     }
+    return XsdInt.unsafe(value);
   }
 }

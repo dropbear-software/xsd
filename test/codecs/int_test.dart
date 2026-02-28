@@ -18,6 +18,11 @@ void main() {
     test('XsdInt.unsafe() bypasses validation', () {
       expect(XsdInt.unsafe(2147483648).value, equals(2147483648));
     });
+
+    test('static min/max methods', () {
+      expect(XsdInt.min, -2147483648);
+      expect(XsdInt.max, 2147483647);
+    });
   });
 
   group('XsdIntCodec', () {

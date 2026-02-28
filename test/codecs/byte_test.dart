@@ -15,6 +15,11 @@ void main() {
       const b = XsdByte.unsafe(1000); // Should not throw
       expect(b.value, 1000);
     });
+
+    test('static min/max methods', () {
+      expect(XsdByte.min, -128);
+      expect(XsdByte.max, 127);
+    });
   });
 
   group('XsdByteCodec', () {
