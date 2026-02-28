@@ -65,6 +65,10 @@ void main() {
         () => decoder.convert(' '),
         throwsA(isA<XsdValidationException>()),
       );
+      expect(
+        () => decoder.convert('0x10'),
+        throwsA(isA<XsdValidationException>()),
+      );
     });
   });
 
