@@ -15,6 +15,11 @@ void main() {
       const b = XsdByte.unsafe(1000); // Should not throw
       expect(b.value, 1000);
     });
+
+    test('static min/max methods', () {
+      expect(XsdByte.min, -128);
+      expect(XsdByte.max, 127);
+    });
   });
 
   group('XsdByteCodec', () {
@@ -66,6 +71,10 @@ void main() {
         );
         expect(
           () => codec.decode('-1000'),
+          throwsA(isA<XsdValidationException>()),
+        );
+        expect(
+          () => codec.decode('999999999999999999999'), // Exceeds 64-bit int
           throwsA(isA<XsdValidationException>()),
         );
       });
