@@ -14,7 +14,7 @@ extension type const XsdByte._(int value) implements int {
 
   /// Validates and creates an [XsdByte].
   ///
-  /// Throws an [ArgumentError] if the value is outside the range `[-128, 127]`.
+  /// Throws a [RangeError] if the value is outside the range `[-128, 127]`.
   factory XsdByte(int value) {
     if (value < min || value > max) {
       throw RangeError.range(value, min, max, 'XsdByte');
