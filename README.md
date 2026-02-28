@@ -74,7 +74,7 @@ We are incrementally implementing the RDF-compatible subset of XSD 1.1 types:
 | | `xsd:yearMonthDuration` | 🏗️ | `XsdDuration` |
 | | `xsd:dayTimeDuration` | 🏗️ | `XsdDuration` |
 | **Limited-range Integers** | `xsd:byte` | ✅ | `XsdByte` |
-| | `xsd:short` | 🏗️ | `int` |
+| | `xsd:short` | ✅ | `XsdShort` / `int` |
 | | `xsd:int` | ✅ | `XsdInt` |
 | | `xsd:long` | ✅ | `XsdLong` / `BigInt` |
 | | `xsd:unsignedByte` | 🏗️ | `int` |

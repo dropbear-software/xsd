@@ -9,6 +9,7 @@ import '../codecs/negative_integer.dart';
 import '../codecs/non_negative_integer.dart';
 import '../codecs/non_positive_integer.dart';
 import '../codecs/positive_integer.dart';
+import '../codecs/short.dart';
 
 /// Global facade for XSD codecs.
 const xsd = XsdFacade._();
@@ -53,4 +54,7 @@ class XsdFacade {
   /// Codec for `xsd:positiveInteger`.
   XsdPositiveIntegerCodec get positiveInteger =>
       const XsdPositiveIntegerCodec();
+
+  /// Codec for `xsd:short`.
+  XsdShortCodec get short => const XsdShortCodec();
 }
