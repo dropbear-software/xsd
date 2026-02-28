@@ -8,6 +8,8 @@ import '../core/xsd_codec.dart';
 ///
 /// This type ensures arbitrary precision and platform consistency by leveraging [BigInt].
 extension type const XsdNonPositiveInteger._(BigInt value) implements BigInt {
+  static final _regex = RegExp(r'^[\-+]?[0-9]+$');
+
   /// Validates and creates an [XsdNonPositiveInteger].
   ///
   /// Throws an [ArgumentError] if the [value] is positive.
@@ -34,8 +36,7 @@ extension type const XsdNonPositiveInteger._(BigInt value) implements BigInt {
   ///
   /// Throws a [FormatException] if the [input] is not a valid non-positive integer.
   factory XsdNonPositiveInteger.parse(String input) {
-    final regex = RegExp(r'^[\-+]?[0-9]+$');
-    if (!regex.hasMatch(input)) {
+    if (!_regex.hasMatch(input)) {
       throw FormatException(
         'Invalid xsd:nonPositiveInteger lexical form: $input',
       );
