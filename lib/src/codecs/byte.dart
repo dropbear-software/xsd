@@ -73,15 +73,15 @@ class XsdByteDecoder extends XsdConverter<String, XsdByte> {
       );
     }
 
-    final value = int.parse(input);
+    final value = BigInt.parse(input);
 
-    if (value < XsdByte.min || value > XsdByte.max) {
+    if (value < BigInt.from(XsdByte.min) || value > BigInt.from(XsdByte.max)) {
       throw XsdValidationException(
         'Value out of range for xsd:byte: $value',
         input: input,
         type: 'xsd:byte',
       );
     }
-    return XsdByte.unsafe(value);
+    return XsdByte.unsafe(value.toInt());
   }
 }

@@ -66,6 +66,10 @@ void main() {
           () => codec.decode('-2147483649'),
           throwsA(isA<XsdValidationException>()),
         );
+        expect(
+          () => codec.decode('999999999999999999999'), // Exceeds 64-bit int
+          throwsA(isA<XsdValidationException>()),
+        );
       });
     });
 

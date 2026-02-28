@@ -74,15 +74,15 @@ class XsdIntDecoder extends XsdConverter<String, XsdInt> {
       );
     }
 
-    final value = int.parse(input);
+    final value = BigInt.parse(input);
 
-    if (value < XsdInt.min || value > XsdInt.max) {
+    if (value < BigInt.from(XsdInt.min) || value > BigInt.from(XsdInt.max)) {
       throw XsdValidationException(
         'Value out of range for xsd:int: $value',
         input: input,
         type: 'xsd:int',
       );
     }
-    return XsdInt.unsafe(value);
+    return XsdInt.unsafe(value.toInt());
   }
 }

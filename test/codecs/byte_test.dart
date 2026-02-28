@@ -73,6 +73,10 @@ void main() {
           () => codec.decode('-1000'),
           throwsA(isA<XsdValidationException>()),
         );
+        expect(
+          () => codec.decode('999999999999999999999'), // Exceeds 64-bit int
+          throwsA(isA<XsdValidationException>()),
+        );
       });
 
       test('throws XsdValidationException for invalid formats', () {
