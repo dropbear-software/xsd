@@ -76,7 +76,7 @@ We are incrementally implementing the RDF-compatible subset of XSD 1.1 types:
 | **Limited-range Integers** | `xsd:byte` | ✅ | `XsdByte` |
 | | `xsd:short` | 🏗️ | `int` |
 | | `xsd:int` | ✅ | `XsdInt` |
-| | `xsd:long` | 🏗️ | `int` / `BigInt` |
+| | `xsd:long` | ✅ | `XsdLong` / `BigInt` |
 | | `xsd:unsignedByte` | 🏗️ | `int` |
 | | `xsd:unsignedShort` | 🏗️ | `int` |
 | | `xsd:unsignedInt` | 🏗️ | `int` |
