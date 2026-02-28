@@ -5,6 +5,7 @@ import '../codecs/double.dart';
 import '../codecs/int.dart';
 import '../codecs/integer.dart';
 import '../codecs/long.dart';
+import '../codecs/negative_integer.dart';
 
 /// Global facade for XSD codecs.
 const xsd = XsdFacade._();
@@ -33,4 +34,8 @@ class XsdFacade {
 
   /// Codec for `xsd:long`.
   XsdLongCodec get long => const XsdLongCodec();
+
+  /// Codec for `xsd:negativeInteger`.
+  XsdNegativeIntegerCodec get negativeInteger =>
+      const XsdNegativeIntegerCodec();
 }

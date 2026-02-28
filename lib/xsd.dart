@@ -10,6 +10,7 @@ export 'src/codecs/double.dart';
 export 'src/codecs/int.dart';
 export 'src/codecs/integer.dart';
 export 'src/codecs/long.dart';
+export 'src/codecs/negative_integer.dart';
 export 'src/core/exceptions.dart';
 export 'src/core/facade.dart';
 export 'src/core/xsd_codec.dart';
