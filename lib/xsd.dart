@@ -14,6 +14,7 @@ export 'src/codecs/negative_integer.dart';
 export 'src/codecs/non_negative_integer.dart';
 export 'src/codecs/non_positive_integer.dart';
 export 'src/codecs/positive_integer.dart';
+export 'src/codecs/short.dart';
 export 'src/core/exceptions.dart';
 export 'src/core/facade.dart';
 export 'src/core/xsd_codec.dart';
