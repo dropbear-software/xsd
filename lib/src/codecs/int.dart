@@ -14,7 +14,7 @@ extension type const XsdInt._(int value) implements int {
 
   /// Validates and creates an [XsdInt].
   ///
-  /// Throws an [ArgumentError] if the value is outside the range
+  /// Throws a [RangeError] if the value is outside the range
   /// `[-2147483648, 2147483647]`.
   factory XsdInt(int value) {
     if (value < min || value > max) {
