@@ -61,6 +61,10 @@ void main() {
           () => codec.decode('-32769'),
           throwsA(isA<XsdValidationException>()),
         );
+        expect(
+          () => codec.decode('999999999999999999999'),
+          throwsA(isA<XsdValidationException>()),
+        );
       });
     });
 

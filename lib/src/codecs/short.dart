@@ -6,12 +6,18 @@ import '../core/xsd_codec.dart';
 ///
 /// Value space: Integers in the range `[-32768, 32767]`.
 extension type const XsdShort._(int value) implements int {
+  /// The minimum value for an `xsd:short`, equal to -2^15.
+  static const int min = -32768;
+
+  /// The maximum value for an `xsd:short`, equal to 2^15 - 1.
+  static const int max = 32767;
+
   /// Validates and creates an [XsdShort].
   ///
-  /// Throws an [ArgumentError] if the value is outside the range `[-32768, 32767]`.
+  /// Throws a [RangeError] if the value is outside the range `[-32768, 32767]`.
   factory XsdShort(int value) {
-    if (value < -32768 || value > 32767) {
-      throw RangeError.range(value, -32768, 32767, 'XsdShort');
+    if (value < min || value > max) {
+      throw RangeError.range(value, min, max, 'XsdShort');
     }
     return XsdShort._(value);
   }
@@ -67,9 +73,10 @@ class XsdShortDecoder extends XsdConverter<String, XsdShort> {
       );
     }
 
-    final value = int.parse(input);
+    final value = BigInt.parse(input);
 
-    if (value < -32768 || value > 32767) {
+    if (value < BigInt.from(XsdShort.min) ||
+        value > BigInt.from(XsdShort.max)) {
       throw XsdValidationException(
         'Value out of range for xsd:short: $value',
         input: input,
@@ -77,6 +84,6 @@ class XsdShortDecoder extends XsdConverter<String, XsdShort> {
       );
     }
 
-    return XsdShort.unsafe(value);
+    return XsdShort.unsafe(value.toInt());
   }
 }
