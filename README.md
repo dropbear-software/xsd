@@ -83,7 +83,7 @@ We are incrementally implementing the RDF-compatible subset of XSD 1.1 types:
 | | `xsd:unsignedLong` | 🏗️ | `BigInt` |
 | | `xsd:positiveInteger` | 🏗️ | `BigInt` |
 | | `xsd:nonNegativeInteger` | 🏗️ | `BigInt` |
-| | `xsd:negativeInteger` | 🏗️ | `BigInt` |
+| | `xsd:negativeInteger` | ✅ | `XsdNegativeInteger` / `BigInt` |
 | | `xsd:nonPositiveInteger` | 🏗️ | `BigInt` |
 | **Encoded Binary** | `xsd:hexBinary` | 🏗️ | `Uint8List` |
 | | `xsd:base64Binary` | 🏗️ | `Uint8List` |
