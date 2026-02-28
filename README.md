@@ -84,7 +84,7 @@ We are incrementally implementing the RDF-compatible subset of XSD 1.1 types:
 | | `xsd:positiveInteger` | 🏗️ | `BigInt` |
 | | `xsd:nonNegativeInteger` | ✅ | `XsdNonNegativeInteger` / `BigInt` |
 | | `xsd:negativeInteger` | ✅ | `XsdNegativeInteger` / `BigInt` |
-| | `xsd:nonPositiveInteger` | 🏗️ | `BigInt` |
+| | `xsd:nonPositiveInteger` | ✅ | `XsdNonPositiveInteger` / `BigInt` |
 | **Encoded Binary** | `xsd:hexBinary` | 🏗️ | `Uint8List` |
 | | `xsd:base64Binary` | 🏗️ | `Uint8List` |
 | **Miscellaneous** | `xsd:anyURI` | 🏗️ | `Uri` |
